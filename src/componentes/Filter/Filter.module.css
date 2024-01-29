@@ -1,0 +1,112 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 8%;
+    top: 1px;
+    left: 16px;
+    position: relative;
+    color: black;
+    background-color: white;
+    box-shadow: 0px 2px 4px black;
+    text-align: center;
+    border-radius: 0px 0px 2px 2px;
+}
+
+.container select{
+    background-color:rgba(241, 241, 241, 0.995);
+    position: relative; 
+    margin: 0 auto;
+    height: 26px;
+    border-radius: 0px 0px 2px 2px;
+    border: solid 1px black;
+    width: 90px;
+    margin-bottom: 10px;
+    color: gray;
+}
+
+.container select option{
+    color: black;
+    border: solid 2px black;
+    border-radius: 4px;
+    backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.container h3{
+    font-size: 14px;
+    margin:  0 auto;
+}
+
+.containerContent{
+    border-radius: 0px 0px 2px 2px;
+    width: 100%;
+    top: 40px;
+    position: relative;
+}
+
+
+.titleContainer{
+    background-color: black;
+    border-radius: 0px 0px 2px 2px;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.titleContainer h3{
+    font-weight: 400;
+    width: 100%;
+}
+
+.createContainer button{
+    width: 114px;
+    height: 40px;
+    font-weight: 400;
+    background-color: black;
+    font-size: 12px;
+    color: white;
+    position: absolute;
+    top: 240px;
+    left: 18px;
+}
+
+
+
+@media (max-width: 768px) {
+    .container{
+        width: 14%;
+    }
+    .containerContent {
+        width: 100vh;
+    }   
+
+    .container select{
+        width: 10vh;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container select{
+        width: 20vh;
+    }
+
+    .containerContent {
+        width: 270vh;
+    }   
+}
+
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+
+    .container select{
+        width: 20vh;
+    }
+
+    .containerContent {
+        width: 280vh;
+    }   
+}

@@ -1,0 +1,31 @@
+.container{
+  display: flex;
+  margin: 0 auto;
+  height: 70vh;
+  justify-content: start;
+  position: relative;
+  top: 50px;
+  left: -400px;
+}
+
+.alert {
+  box-shadow: black 0px 2px 8px;
+  border:solid 1px #fd250d4a;
+    padding: 10px;
+    margin: 0 auto;
+    background-color: #edb5af;
+    color: rgb(140, 0, 0);
+    border-radius: 2px;
+    display: flex;
+    width: 380px;
+    height: 48px;
+  }
+
+  .alert p{
+    display: flex;
+    text-align: start;
+    position: relative;
+    justify-content: center;
+    font-size: 16px;
+  }
+  

@@ -1,0 +1,32 @@
+.main-container{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: -4rem;
+
+}
+.sec-cont{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+.search-icon{
+    margin-left: 9.5rem;
+    font-size: 1.5rem;
+}
+.search-input{
+    border: none;
+    color: none;
+    background: none;
+}
+.search-input:focus {
+    border: none;
+    outline: none;
+
+
+  }

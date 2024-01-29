@@ -1,0 +1,7 @@
+.imgContent img{
+    justify-self: center;
+    object-fit: cover;
+    margin: 0 auto;
+
+}
+

@@ -1,0 +1,15 @@
+.container{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.cardContent{
+    flex-wrap: wrap;
+    flex-direction: row;
+    display: flex;
+}
+
+.linkContainer{
+    margin: 0 auto;
+}

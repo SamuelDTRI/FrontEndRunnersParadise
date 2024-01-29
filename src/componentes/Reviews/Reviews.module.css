@@ -1,0 +1,190 @@
+.container label{
+    font-size: 28px;
+    font-weight:600;
+}
+
+.textAreaContainer{
+    height: 70px;
+    margin: 0 auto;
+    position: relative;
+    top: 6px;
+    width: 400px;
+
+    margin-left: 15px;
+}
+
+.userContent{
+    margin: 20px;
+    position: relative;
+    left: -2px;
+    display: flex;
+}
+
+.userContent img{
+    margin-right: 10px;
+}
+
+.userDataReview img{
+    width: 32px;
+    height: 32px;
+    position: relative;
+    border-radius: 50%;
+    object-fit: cover;
+    justify-self: center;
+}
+
+.container h4{
+    position: relative;
+    top: 6px;
+    font-size: 18px;
+}
+
+.container h5{
+    position: relative;
+    top: 10px;
+    color: red;
+}
+.container span{
+    position: relative;
+    top: -2px;
+    left: -6px;
+}
+
+.container{
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    height: 100%;
+}
+
+.container::-webkit-scrollbar{
+    width: 0px;
+}
+
+.ratingContainer{
+    display: flex;
+    margin-left: 28px;
+    position: relative;
+    top: -20px;
+}
+
+
+.ratingContainer h5{
+    top: 2px;
+    left: 10px;
+    position: relative;
+    width: 200px;
+}
+
+.container button{
+    width: 60px;
+    height: 30px;
+    position: relative;
+    top: -16px;
+    left: 30px;
+    background-color: black;
+}
+
+
+.container button h5{
+    color: white;
+    position: relative;
+    top: -6.5px;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.commentsContainer{
+    margin-left: 20px;
+}
+
+textarea{
+    position: relative;
+    left: 18px;
+    display: flex;
+    margin-left: 20px;
+    width: 200px;
+    height: 90px;
+    position: relative;
+    top: -20px;
+}
+
+.usersReviewsContainer{
+    display: flex;
+}
+
+.userReview{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 400px;
+    margin: 30px;
+    position: relative;
+    top: 20px;
+}
+
+.userReview h5{
+    color:black;
+    display: flex;
+    position: relative;
+    font-weight: 300;
+    left: 8px;
+    font-size: 18px;
+    top: 4px;
+}
+
+.userRating{
+    position: relative;
+    margin-left: 14px;
+}
+
+.noAvailable p{
+    position: relative;
+    background-color: #df8a8aac;
+    top: 40px;
+}
+
+.userDataReview{
+    position: relative;
+    top: -10px;
+    left: -10px;
+    display: flex;
+}
+
+.userDataReview h5{
+    position: relative;
+    left: 8px;
+    font-weight: 400;
+}
+
+.userContentReview{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    position: relative;
+    left: 40px;
+}
+
+.userContentReview h5{
+    font-size: 20px;
+}
+
+
+.reviewComment {
+    width: 500px;
+}
+
+.reviewComment p {
+    font-size: 14px;
+    padding: 10px;
+    box-shadow: 0px 0px 1px gray;
+    border-radius: 4px;
+    background-color: rgba(95, 95, 95, 0.108);
+    margin-bottom: 8px;
+    overflow-wrap: break-word; /* Añadida para evitar que las palabras largas desborden el contenedor */
+}
+
+.userRatingReview .ratingNumber{
+top: -11px;
+left: -10px;
+}
