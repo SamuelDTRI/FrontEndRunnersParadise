@@ -1,6 +1,5 @@
 import React from "react";
-import BasicRating from "../Reviews/Reviews";
-import style from "../Card/Card.module.css"; // Asegúrate de tener un archivo Card.css en tu proyecto
+import style from "../Card/Card.module.css"; 
 
 const Card = ({ id, model, size, image, color, brand, price }) => {
   let logoUrl;

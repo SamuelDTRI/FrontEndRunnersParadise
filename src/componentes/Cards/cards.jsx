@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import Card from "../Card/Card";
 import style from "./Cards.module.css"
 
