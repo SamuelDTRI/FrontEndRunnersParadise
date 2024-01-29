@@ -5,7 +5,7 @@ import Landing from "./views/Landing/landing";
 import Home from "./views/Home/home";
 import Detail from "./views/Detail/detail";
 import Create from "./componentes/Create/create";
-import LogIn from "./componentes/LoginForm/Login";
+import LogIn from "./componentes/LogInForm/LogIn";
 import About from "./componentes/About/about";
 import Registro from "./componentes/Register/Register";
 import Perfil from "./componentes/perfilDeUsuario/perfil";
