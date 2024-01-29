@@ -46,7 +46,6 @@ const initialState = {
     error: null,
   },
   error: null,
-
   sneakers: [],
   allCopySneakers: [],
   currentPage: [],
@@ -63,7 +62,6 @@ const initialState = {
   selectedImageIndex: [],
   login: {},
   loading: false,
-  error: null,
   auth: {
     loading: false,
   },
@@ -72,7 +70,7 @@ const initialState = {
   searchLoading: false,
   searchError: null,
   searchData: null,
-  isAdmin: true,
+  isAdmin: false,
   updateUserError: null,
 };
 const stateSearchBar = {
