@@ -7,13 +7,10 @@ import Select from "react-select";
 import {
   postCreateProduct,
   clearCreateProductState,
-  createProductSuccess,
   createProductFailure,
 } from "../../redux/actions/actions";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import Snackbar from "@mui/material/Snackbar";
 
 const ProductForm = () => {
@@ -367,7 +364,6 @@ const ProductForm = () => {
               color="inherit"
               onClick={handleSnackbarClose}
             >
-              <CloseIcon fontSize="small" />
             </IconButton>
           </React.Fragment>
         }
