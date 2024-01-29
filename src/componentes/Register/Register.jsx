@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import styles from "./Register.module.css";
 import { registerUser } from "../../redux/actions/actions";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import Snackbar from "@mui/material/Snackbar";
 
 const Register = () => {
@@ -191,7 +190,6 @@ const Register = () => {
               color="inherit"
               onClick={handleSnackbarClose}
             >
-              <CloseIcon fontSize="small" />
             </IconButton>
           </React.Fragment>
         }
