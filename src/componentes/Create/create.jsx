@@ -122,7 +122,7 @@ const ProductForm = () => {
     NEWBALANCE: ["green", "white", "black", "pink", "yellow", "red", "blue"],
   };
 
-  const colorOptions = (brandColors[input.brand]).map((color, index) => ({
+  const colorOptions = (brandColors[input.brand] || []).map((color, index) => ({
     value: color,
     label: color,
     key: index,

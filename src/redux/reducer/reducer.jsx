@@ -39,11 +39,6 @@ import {
 } from "../action-types/action-types";
 
 const initialState = {
-  loading: false,
-  auth: {
-    isAuthenticated: false,
-    userData: null,
-  },
   product: {
     detail: null,
     createdProduct: null,
