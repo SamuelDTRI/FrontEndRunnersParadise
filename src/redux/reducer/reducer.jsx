@@ -84,7 +84,6 @@ const initialState = {
   postReviewSuccess: false,
   selectedImageIndex: [],
   login: {},
-  loading: false,
   auth: {
     loading: false,
   },
