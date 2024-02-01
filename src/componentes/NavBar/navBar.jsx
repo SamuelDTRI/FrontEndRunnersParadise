@@ -96,7 +96,7 @@ export default function NavBar(props) {
                       />
                     </Link>
                     <div className={style.userContent}>
-                      <h4>{`Usuario: ${token?.name}`}</h4>
+                      <h4>{token?.name}</h4>
                     </div>
                     <li
                       className="nav-item dropdown"
