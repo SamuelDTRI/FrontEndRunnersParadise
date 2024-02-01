@@ -17,15 +17,15 @@
   right: 140px;
 }
 
-.formandpreviewcontainer {
+.form-and-preview-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 20px;
 }
 
-.formcontainer,
-.previewcontainer {
+.form-container,
+.preview-container {
   background-color: rgba(200, 204, 207, 0.856);
   width: 600px;
   margin-left: 80px;
@@ -41,15 +41,15 @@
   margin-bottom: 200px;
 }
 
-.formcontainer::-webkit-scrollbar {
+.form-container::-webkit-scrollbar {
   width: 0px;
 }
 
-.previewcontainer {
+.preview-container {
   border-left: 10px;
 }
 
-.formlabel {
+.form-label {
   font-weight: bold;
   color: rgb(255, 255, 255);
   border-radius: 10px;
@@ -58,7 +58,7 @@
   margin-bottom: 10px;
 }
 
-.forminput {
+.form-input {
   width: 100%;
   border: none;
   border-bottom: 1px solid rgb(21, 19, 19);
@@ -69,7 +69,7 @@
   padding: 10px;
 }
 
-.errormessage {
+.error-message {
   color: rgb(245, 24, 24);
   font-size: 10px;
   position: relative;
@@ -77,13 +77,16 @@
   left: 6px;
 }
 
-.checkboxcontainer {
+.button-container {
   display: flex;
-  flex-wrap: wrap;
-  margin-top: 10px;
+  justify-content: center;
+  position: absolute;
+  top: 30px;
+  margin-top: 400px;
+  margin-left: 350px;
 }
 
-.submitbutton {
+.submit-button {
   font-size: 14px;
   background-color: dodgerblue;
   color: white;
@@ -99,11 +102,11 @@
   transition: background-color 0.3s;
 }
 
-.submitbutton:hover {
+.submit-button:hover {
   background-color: #007acc;
 }
 
-.imagepreview {
+.preview-image {
   width: auto;
   height: 200px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -117,7 +120,7 @@
   margin-bottom: 20px;
 }
 
-.previewimage {
+.preview-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -174,155 +177,18 @@
   margin-right: 0px;
 }
 
-.selectedsizescontainer {
+.selected-sizes-container {
   display: flex;
   justify-content: center;
 }
 
-.selectedsize {
+.selected-size {
   padding: 2px;
   margin-right: 2px;
   margin-bottom: 8px;
   margin-top: -8px;
 }
 
-.sizeseparator {
+.size-separator {
   width: 5px;
-}
-
-.buttoncontainer {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  top: 30px;
-  margin-top: 400px;
-  margin-left: 350px;
-}
-
-.preciopreview {
-  color: green;
-  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  text-align: start;
-  top: 10px;
-  left: 10px;
-  font-size: 20px;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.forminput::placeholder {
-  color: #f3e9e9;
-}
-
-.colormarca [disabled] {
-  color: #999;
-}
-
-.cuadrante,
-.agradecimientos,
-.about {
-  width: 50%;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-  .cuadrante,
-  .agradecimientos,
-  .about {
-    width: 100%;
-    margin-right: 0;
-  }
-}
-
-.successmessage {
-  position: relative;
-  top: -40px;
-}
-
-.imagecontainer {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbutton {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 2em;
-  color: white;
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.navbutton:hover {
-  opacity: 1;
-}
-
-.navbutton:active {
-  transform: scale(1.2);
-}
-
-.left {
-  left: 0;
-}
-
-.right {
-  right: 0;
-}
-
-.previewimage {
-  max-width: 100%;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-.inputModelo {
-  position: absolute;
-  width: 200px;
-  margin-left: 80px;
-}
-
-.formlabelModelo {
-  margin-top: 7px;
-  color: white;
-}
-
-.inputprecio {
-  position: absolute;
-  width: 5px;
-  margin-left: 350px;
-}
-
-.formlabelprecio {
-  color: rgb(37, 179, 37);
-  position: absolute;
-  margin-left: 295px;
-  margin-top: 10px;
-}
-
-.forminputprecio {
-  background-color: rgba(189, 193, 197, 0.973);
-  border-color: rgba(213, 217, 221, 0.973);
-}
-
-.formlabelimagen {
-  margin-top: 40px;
-  position: relative;
-  color: #f3e9e9;
-}
-
-.inputimage {
-  position: relative;
-  margin-top: -45px;
-  margin-left: 70px;
-}
-
-.formlabelDescripcion {
-  position: relative;
-  margin-top: -5px;
 }

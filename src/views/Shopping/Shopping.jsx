@@ -107,24 +107,24 @@ const Shopping = () => {
                   Sizes: {item.size.join(", ")}
                 </div>
                 <div className={style.quantityButtons}>
-                  <button
+                  {/* <button
                     onClick={() =>
                       handleQuantityChange(item.id, quantities[item.id] - 1)
                     }
                   >
                     -
-                  </button>
+                  </button> */}
                   Amount:{" "}
                   {quantities[item.id] && quantities
                     ? quantities[item.id]
                     : item.quantity}
-                  <button
+                  {/* <button
                     onClick={() =>
                       handleQuantityChange(item.id, quantities[item.id] + 1)
                     }
                   >
                     +
-                  </button>
+                  </button> */}
                 </div>
                 <button
                   onClick={() => handleRemoveFromCart(item.productId)}

@@ -192,7 +192,7 @@ function ResponsiveAppBar() {
     return <BuyerNavBar />;
   }
 
-  if (auth.token.rol == "admin") {
+  if (auth) {
     return <AdminNavBar />;
   }
 }

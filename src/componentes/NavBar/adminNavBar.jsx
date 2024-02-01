@@ -22,6 +22,7 @@ const settings = ["Panel", "Create", "Logout"];
 
 function AdminNavBar() {
   const { auth, setAuth } = React.useContext(AuthContext);
+  const history = useHistory(); // Agrega esta línea para obtener la instancia de history
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
