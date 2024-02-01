@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import "./paymenthMethods.css";
+import "./paymentMethods.css";
 import Diners from "../../../assets/diners-club-international-tarjeta.png";
 import MasterCard from "../../../assets/Master.jpg";
 import Visa from "../../../assets/VisaT.png";
