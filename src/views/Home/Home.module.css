@@ -1,35 +1,37 @@
-.container{
+.container {
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
+  width: 100vw;
   background-attachment: fixed;
   background-image: url("../../assets//backgroundHome.jpg");
 }
 
-.cardsComponent{
+.cardsComponent {
   position: relative;
   margin-left: 140px;
-  top:-180px;
+  top: -180px;
   z-index: 20;
 }
 
-.searchBarComponent{
+.searchBarComponent {
   position: relative;
   margin-left: 700px;
 }
 
-.paginatedComponent{
+.paginatedComponent {
   position: absolute;
   width: 100%;
   left: 200px;
   display: block;
 }
 
-.filterComponent{
+.filterComponent {
   z-index: 10;
   position: relative;
 }
 
-.createContainer button{
+.createContainer button {
   width: 114px;
   height: 40px;
   font-weight: 400;
@@ -39,20 +41,19 @@
   top: 20px;
 }
 
-
-.paginatedContainer{
+.paginatedContainer {
   display: flex;
   position: absolute;
   justify-content: end;
-  left:1360px;
+  left: 1360px;
 }
 
-.paginado{
+.paginado {
   margin-left: 1400px;
   margin-bottom: 20px;
 }
 
-.alertComponent{
+.alertComponent {
   position: relative;
   display: flex;
 }

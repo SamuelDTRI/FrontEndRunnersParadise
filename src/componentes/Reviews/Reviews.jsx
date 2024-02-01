@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
 import Form from "react-bootstrap/Form";
 import style from "./Reviews.module.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postReviews, fetchReviews } from "../../redux/actions/actions";
 import { AuthContext } from "../AuthProvider/authProvider";
@@ -24,21 +25,20 @@ const BasicRating = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const response = await dispatch(
+      await dispatch(
         postReviews(
           idKey,
           value,
           review,
           auth?.token.name,
+          auth?.token.surName,
           auth?.token.imageUrl
         )
       );
-      console.log("Respuesta del servidor:", response);
       setSubmitSuccess("Review posted successfully");
-      setReview("");
+      setReview(""); // Limpiar el formulario
       setValue(null);
     } catch (error) {
-      console.error("Error al enviar la revisión:", error.response);
       setSubmitError("Error posting review");
     }
     setSubmitting(false);
@@ -46,20 +46,20 @@ const BasicRating = () => {
 
   const handleChange = (e) => {
     const userInput = e.target.value;
-    const words = userInput.split(" ").filter((word) => word !== " ");
-    const truncatedWords = words.slice(0, 60);
-    const truncatedText = truncatedWords.join(" ");
+    const truncatedText = userInput.slice(0, 600);
     setReview(truncatedText);
   };
 
   useEffect(() => {
+    // Llama a la acción fetchReviews cuando el componente se monta
+    console.log("aca estan:", allReviews);
     dispatch(fetchReviews());
   }, [dispatch]);
 
   const allReviews = useSelector((state) => state.reviews);
 
   const productReviews = allReviews.filter(
-    (review) => review.productId === idKey
+    (review) => review.productId == idKey
   );
   console.log("REVIEWS DEL PRODUCTO", productReviews);
 
@@ -73,7 +73,6 @@ const BasicRating = () => {
                 <div className={style.reviewTitleContainer}>
                   <h3 className={style.reviewTitle}>REVIEWS</h3>
                 </div>
-                <hr style={{ width: "1000px", display: "flex" }} />
                 {productReviews.length > 0 ? (
                   productReviews
                     .slice()
@@ -87,7 +86,7 @@ const BasicRating = () => {
                             )}
                           </div>
                           <h5>
-                            {review.name}{" "}
+                            {review.name} {review.surName}
                             <b
                               style={{
                                 fontSize: "15px",
@@ -153,12 +152,9 @@ const BasicRating = () => {
         <div className={style.container}>
           <Form className={style.containerContent}>
             <Form.Group controlId="rating">
-              <div className={style.reviewTitleContainer}>
-                <h3 className={style.reviewTitle}>REVIEWS</h3>
-              </div>
               <br />
               <div className={style.userContent}>
-                {auth?.token?.imageUrl && (
+                {auth?.token?.imageUrl ? (
                   <img
                     src={auth.token.imageUrl}
                     style={{
@@ -168,9 +164,26 @@ const BasicRating = () => {
                     }}
                     alt="user-avatar"
                   />
+                ) : (
+                  <img
+                    src="https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png"
+                    style={{
+                      borderRadius: "50%",
+                      height: "34px",
+                      width: "34px",
+                    }}
+                    alt="default-avatar"
+                  />
                 )}
-
-                <h4>{auth?.token.name}</h4>
+                <h4>
+                  {auth?.token.name} {auth?.token.surName}
+                </h4>
+              </div>
+              <div className={style.reviewInfo}>
+                <p>
+                  Las opiniones son públicas y contienen la información de tu
+                  cuenta y dispositivo. <a href="">Más información</a>
+                </p>
               </div>
               <br />
               <div className={style.ratingContainer}>
@@ -187,7 +200,7 @@ const BasicRating = () => {
             <Form.Group controlId="review" className={style.container}>
               <textarea
                 className="form-control"
-                style={{ width: "400px" }}
+                style={{ width: "300px" }}
                 value={review}
                 cols="4"
                 onChange={handleChange}
@@ -199,7 +212,9 @@ const BasicRating = () => {
             </Form.Group>
             <div className={style.userReviewsContainer}>
               <div className={style.usersReviewsContent}>
-                <hr style={{ width: "1000px" }} />
+                <div className={style.reviewTitleContainer}>
+                  <h3 className={style.reviewTitle}>PRODUCT REVIEWS</h3>
+                </div>
                 {productReviews.length > 0 ? (
                   productReviews
                     .slice()
@@ -213,7 +228,7 @@ const BasicRating = () => {
                             )}
                           </div>
                           <h5>
-                            {review.name}{" "}
+                            {review.name} {review.surName}
                             <b
                               style={{
                                 fontSize: "15px",
@@ -260,8 +275,8 @@ const BasicRating = () => {
                       borderRadius: "2px",
                       width: "180px",
                       display: "flex",
-                      margin: "0 auto",
                       marginBottom: "30px",
+                      justifyContent: "center",
                     }}
                   >
                     ⛔ No reviews available
@@ -270,10 +285,6 @@ const BasicRating = () => {
               </div>
             </div>
           </Form>
-          <hr style={{ width: "1000px", display: "flex" }} />
-          <div>
-            <h4>OTHER REVIEWS</h4>
-          </div>
         </div>
       </>
     );

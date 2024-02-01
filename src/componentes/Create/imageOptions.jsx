@@ -25,6 +25,7 @@ const ImageOptions = ({
     newImageOptions[index].value = value;
     setImageOptions(newImageOptions);
 
+    // Si el tipo es 'url', actualiza imageUrls con la nueva URL
     if (newImageOptions[index].type === "url") {
       const newImageUrls = [...imageUrls];
       newImageUrls[index] = value;
@@ -33,14 +34,20 @@ const ImageOptions = ({
   };
 
   const handleFileChange = (index, event) => {
-    const file = event.target.files[0];
-    const newImageOptions = [...imageOptions];
-    const newImageFiles = [...imageFiles];
+    const file = event.target.files;
+    if (file) {
+      const newImageFiles = imageFiles;
 
-    newImageOptions[index].file = file;
-    setImageOptions(newImageOptions);
-    newImageFiles[index] = URL.createObjectURL(file);
-    setImageFiles(newImageFiles);
+      setImageFiles(newImageFiles);
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const newImageUrls = [...imageUrls];
+        newImageUrls[index] = e.target.result;
+        setImageUrls(newImageUrls);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleAddImageOption = () => {

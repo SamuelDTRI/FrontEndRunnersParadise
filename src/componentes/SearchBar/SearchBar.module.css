@@ -1,82 +1,73 @@
-.container{
-    display: flex;
-    position: absolute;
-    left: -500px;
-    top: -46px;
+.container {
+  display: flex;
+  position: absolute;
+  left: -500px;
+  top: -46px;
 }
 
 .containerForm {
-    width: 300px;
-    flex-direction: row;
+  width: 300px;
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.containerForm input {
+  width: 200px;
+  height: 28px;
+  border-radius: 4px;
+  border: solid 1px black;
+}
+
+.containerForm input:hover {
+  width: 240px;
+  transition: 0.4s ease-in-out;
+}
+
+.containerForm input:focus {
+  width: 240px;
+}
+
+.containerForm input:focus {
+  width: 240px;
+}
+
+.container input:active {
+  background-color: #0d6dfd80;
+  transition: 1;
+}
+
+.containerForm button {
+  width: 30px;
+  height: 30px;
+  background-color: #0d6efd;
+}
+
+.buttonImg {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  top: 4.5px;
+  left: -25px;
+}
+
+@media (max-width: 767px) {
+  .container {
     display: flex;
-    flex-wrap: wrap;
-}
-
-.containerForm input{
-    width: 200px;
-    height: 28px;
-    border-radius: 4px;
-    border: solid 1px black;
-}
-
-.containerForm input:hover{
-    width: 240px;
-    transition: 0.4s ease-in-out;
-}
-
-.containerForm input:focus{
-    width: 240px;
-}
-
-.containerForm input:focus{
-    width: 240px;
-}
-
-
-.container  input:active{
-background-color: #0d6dfd80;
-transition: 1;
-}
-
-.containerForm button{
-    width: 30px;
-    height: 30px;
-    background-color: #0D6EFD;
-}
-
-.buttonImg{
     position: relative;
-    width: 20px;
-    height: 20px;
-    top: 4.5px;
-    left: -25px;
+    left: -500px;
+    width: 222px;
+  }
 }
 
-@media (max-width: 768px) {
-    .container{
-        display: flex;
-        position: relative;
-        left: 340px;
-    }
-    
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    display: flex;
+    position: relative;
+    left: -520px;
+    width: 222px;
+  }
 }
 
-
-@media (min-width: 768px) and (max-width: 1024px) {
-    .container{
-        display: flex;
-        position: relative;
-        left: 200px;
-    }
-    
-}
-
-
-@media (min-width: 1024px) and (max-width: 1280px) {
-    .container{
-        display: flex;
-        position: relative;
-        left: 300px;
-    }
-    
+@media (min-width: 1024px) {
 }

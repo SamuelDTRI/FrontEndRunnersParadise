@@ -44,7 +44,7 @@
 
 .form-label {
   font-weight: bold;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   border-radius: 10px;
   height: 20px;
   font-size: 14px;
@@ -104,11 +104,6 @@
   align-items: center;
   justify-self: center;
   object-fit: cover;
-}
-
-.form-input[type="file"] {
-  margin-top: 17px; /* Espacio adicional arriba */
-  cursor: pointer; /* Cambiar el cursor al pasar sobre el área del archivo */
 }
 
 .preview-image {
@@ -174,7 +169,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 4px;
+  margin-top: 1px;
   margin-right: 0px;
 }
 

@@ -21,15 +21,18 @@ const Home = () => {
   const size = useSelector((state) => state?.sizeValue);
   const price = useSelector((state) => state?.orderPrice);
 
-  const searchState = useSelector((state) => state?.dataSearch);
-  const pageSize = 8;
+  const searchState = useSelector((state) => state?.dataSearch); //  estado para los resultados de la búsqueda
+  const pageSize = 6;
   console.log(searchState);
   console.log(price);
+  console.log("todas las sneakers", totalSneaker);
 
   useEffect(() => {
     if (searchState && searchState.length > 0) {
+      console.log("searchbar");
       dispatch(searchBar(searchState, currentPageSearch, pageSize, price));
     } else {
+      console.log("todos snesakers");
       dispatch(getSneakers(currentPage, pageSize, brand, color, size, price));
     }
   }, [dispatch]);

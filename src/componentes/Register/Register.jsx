@@ -12,7 +12,7 @@ const Register = () => {
     surName: "",
     email: "",
     password: "",
-    admin: false,  
+    rol: "",
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -38,7 +38,7 @@ const Register = () => {
     const newErrors = {};
 
     Object.entries(formData).forEach(([key, value]) => {
-      if (key !== "admin" && value.trim() === "") {
+      if (key !== "rol" && value.trim() === "") {
         newErrors[key] = "*Campo obligatorio*";
       }
     });
@@ -155,16 +155,17 @@ const Register = () => {
           <span className={styles.error}>{errors.password}</span>
         )}
 
-        <label htmlFor="admin">¿Admin?</label>
-        <input
-          type="checkbox"
-          id="admin"
-          name="admin"
-          checked={formData.admin}
-          onChange={(e) =>
-            setFormData({ ...formData, admin: e.target.checked })
-          }
-        />
+        <label htmlFor="rol">Rol:</label>
+        <select
+          id="rol"
+          name="rol"
+          value={formData.rol}
+          onChange={handleChange}
+        >
+          <option value="admin">Admin</option>
+          <option value="seller">Seller</option>
+          <option value="buyer">Buyer</option>
+        </select>
 
         <button
           type="button"
@@ -189,8 +190,7 @@ const Register = () => {
               aria-label="close"
               color="inherit"
               onClick={handleSnackbarClose}
-            >
-            </IconButton>
+            ></IconButton>
           </React.Fragment>
         }
       />

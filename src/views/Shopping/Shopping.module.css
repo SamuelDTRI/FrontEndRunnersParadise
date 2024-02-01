@@ -1,0 +1,109 @@
+.shoppingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tableRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.shoppingCard {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.shoppingCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cardImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.cardContent {
+  padding: 16px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #0d6efd;
+}
+
+.cardPrice {
+  font-size: 16px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: green;
+}
+
+.cardColors {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #000000;
+  font-family: Verdana, Geneva, Tahoma, "Franklin Gothic Medium", "Arial Narrow";
+}
+
+.cardSizes {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #000000;
+  font-family: Verdana, Geneva, Tahoma, "Franklin Gothic Medium", "Arial Narrow";
+}
+
+.buyButtonContainer {
+  text-align: center;
+}
+
+.buyButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.buyButton:hover {
+  background-color: #45a049;
+}
+
+.cardRemoveButton {
+  background-color: #ff6961;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cardRemoveButton:hover {
+  background-color: #ff4d4d;
+}

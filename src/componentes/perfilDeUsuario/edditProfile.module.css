@@ -1,0 +1,91 @@
+.form {
+  width: 270px;
+  height: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffffda;
+  margin-left: 410px;
+  margin-top: 0px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  overflow-y: auto;
+}
+
+.inputContainer {
+  margin-bottom: 15px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-top: -5px;
+}
+
+.editButton,
+.saveButton {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+}
+
+.editButton {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 0px;
+}
+
+.editButton:hover {
+  background-color: #2980b9;
+}
+
+.saveButton {
+  background-color: #27ae60;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.saveButton:hover {
+  background-color: #219653;
+}
+
+.error {
+  color: #c0392b;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Media Query para pantallas más pequeñas */
+@media (max-width: 600px) {
+  .form {
+    width: 80%;
+  }
+}
+
+.title {
+  margin-bottom: 20px;
+  border-bottom: 2px black;
+}
+
+.fileInput {
+  border: 1px solid rgb(186, 184, 184);
+}

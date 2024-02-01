@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { IoPersonSharp } from "react-icons/io5";
 import { FaShopify } from "react-icons/fa";
@@ -11,6 +11,7 @@ import { gapi } from "gapi-script";
 export default function NavBar(props) {
   const { auth, setAuth } = useContext(AuthContext);
   const history = useHistory();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const logOut = () => {
     if (window.gapi && window.gapi.auth2) {
@@ -29,6 +30,7 @@ export default function NavBar(props) {
     console.log("Valor actualizado de auth:", auth);
   }, [auth]);
 
+  // const imgDefault = "https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-dt9lf8um.png"
   const imgDefault =
     "https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg";
 
@@ -53,8 +55,6 @@ export default function NavBar(props) {
                   alt="Runners Paradise Logo"
                 />
               </Link>
-              <div className={style.searchBarContent}></div>
-              <div className={style.searchBarContainer}></div>
               <div>
                 <div
                   className="collapse navbar-collapse"
@@ -74,7 +74,7 @@ export default function NavBar(props) {
                         Create
                       </Link>
                     </li>
-                    <li className={style.navBarContentFirst}>
+                    <li className="nav-item">
                       <Link
                         to="/about"
                         className="nav-link text-black"
@@ -87,32 +87,39 @@ export default function NavBar(props) {
                         ¿Quiénes somos?
                       </Link>
                     </li>
-                    <li className={style.navBarContent}>
-                      <Link to="#" className="nav-link text-black">
-                        <FaShopify
-                          style={{ fontSize: "24px", zIndex: "800" }}
-                        />
-                      </Link>
-                    </li>
+                    <Link
+                      to={!token.id ? "/login" : "/Shopping"}
+                      className="nav-link text-black"
+                    >
+                      <FaShopify
+                        style={{ fontSize: "24px", marginLeft: "1rem" }}
+                      />
+                    </Link>
                     <div className={style.userContent}>
-                      <h4>{token?.name}</h4>
+                      <h4>{`Usuario: ${token?.name}`}</h4>
                     </div>
                     <li
                       className="nav-item dropdown"
-                      style={{ marginRight: "85px" }}
+                      style={{ marginRight: "5rem" }}
                     >
+                      {/* {} */}
                       <div className={style.userImage}></div>
                       <ul className="dropdown-menu">
-                        <li>
-                          <Link to="/perfil" className="dropdown-item">
-                            Perfil
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="/configuracion" className="dropdown-item">
-                            Ajustes
-                          </Link>
-                        </li>
+                        {auth.token.rol === "buyer" && (
+                          <li>
+                            <Link to="/configUser" className="dropdown-item">
+                              Ajustes
+                            </Link>
+                          </li>
+                        )}
+
+                        {auth.token.rol === "admin" && (
+                          <li>
+                            <Link to="/configAdmin" className="dropdown-item">
+                              Ajustes
+                            </Link>
+                          </li>
+                        )}
                         <div className="dropdown-divider"></div>
                         <li className="dropdown-item" onClick={logOut}>
                           Cerrar Sesión
@@ -120,6 +127,7 @@ export default function NavBar(props) {
                       </ul>
                     </li>
                   </ul>
+
                   <Link
                     className="nav-link text-black dropdown-toggle"
                     to="#"
@@ -128,11 +136,11 @@ export default function NavBar(props) {
                     aria-expanded="false"
                   >
                     <img
-                      src={token.imageUrl || imgDefault}
+                      src={token?.imageUrl || imgDefault}
                       style={{
                         borderRadius: "50%",
-                        height: "15%",
-                        width: "15%",
+                        height: "26%",
+                        width: "16%",
                       }}
                       alt="User Avatar"
                     />
@@ -175,7 +183,7 @@ export default function NavBar(props) {
                         ¿Quiénes somos?
                       </Link>
                     </li>
-                    <Link to="#" className="nav-link text-black">
+                    <Link to="/login" className="nav-link text-black">
                       <FaShopify
                         style={{ fontSize: "24px", marginLeft: "1rem" }}
                       />
@@ -222,5 +230,3 @@ export default function NavBar(props) {
     );
   }
 }
-
-//dsadsds

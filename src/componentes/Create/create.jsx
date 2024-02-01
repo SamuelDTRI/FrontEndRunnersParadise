@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import validation from "../Validaciones/validaciones";
+import validation from "./validations";
 import "./create.css";
 import { Link } from "react-router-dom";
 import Select from "react-select";
@@ -10,7 +10,9 @@ import {
   createProductFailure,
 } from "../../redux/actions/actions";
 import { useEffect } from "react";
+import styled from "@emotion/styled";
 import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close"; //npm install --force && npm install @mui
 import Snackbar from "@mui/material/Snackbar";
 
 const ProductForm = () => {
@@ -81,7 +83,6 @@ const ProductForm = () => {
         console.log("Respuesta del servidor:", response);
         setMessage("Producto creado exitosamente.");
         setSnackbarOpen(true);
-
         setInput({
           name: "",
           brand: "",
@@ -95,7 +96,7 @@ const ProductForm = () => {
         console.error("Error al crear el producto:", error);
         dispatch(createProductFailure(error));
         setMessage(
-          "Error al crear el producto. Contacta con un administrador para más detalles."
+          "Error al crear el producto. Verifica la consola para más detalles."
         );
         setSnackbarOpen(true);
       }
@@ -112,7 +113,7 @@ const ProductForm = () => {
     setSnackbarOpen(false);
   };
 
-  const availableBrands = ["ADIDAS", "NIKE", "NEWBALANCE"];
+  const availableBrands = ["NIKE", "ADIDAS", "NEWBALANCE"];
   const brandColors = {
     NIKE: ["green", "white", "black", "pink", "yellow", "red", "blue"],
     ADIDAS: ["green", "white", "black", "pink", "yellow", "red", "blue"],
@@ -363,8 +364,7 @@ const ProductForm = () => {
               aria-label="close"
               color="inherit"
               onClick={handleSnackbarClose}
-            >
-            </IconButton>
+            ></IconButton>
           </React.Fragment>
         }
       />

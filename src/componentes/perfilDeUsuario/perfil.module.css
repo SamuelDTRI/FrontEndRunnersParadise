@@ -1,203 +1,224 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+.Fullstack {
+  background-image: url("https://www.crfmontigala.com/wp-content/uploads/2019/03/elegir-zapatillas-deporte.jpg");
+  background-size: cover;
+  background-position: top;
+  display: top;
+  background-attachment: fixed;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.container {
+  align-items: center;
+  justify-content: center;
+  height: 700px;
+  margin-top: -50px;
+  margin-left: 350px;
+}
 
 .userProfile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    /* background: linear-gradient(to right, #001a4d, #006aff); */
-    background-image: url("https://luckyfeetshoes.com/cdn/shop/articles/NB_1.jpg?v=1690223841");
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.658);
+  margin: 0 auto;
+  padding: 15.3px;
+  height: 38.25px;
 }
 
 .profileContainer {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    margin-bottom: 100px;
-    
+  display: flex;
+  margin-top: -10px;
+  border: 1px solid black;
+  height: 100px;
+  width: 100px;
+  border-radius: 9px;
+  background-color: #ffffff8e;
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.7);
+  position: absolute;
 }
 
 .profilePicture {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border: 4px solid #c1c8c8;
-    background-color: #5577e9;
-    margin-left: -690px;
-    margin-top: -250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.658);
-}
-
-.banner {
-    width: 100%;
-    height: 300px;
-    border-bottom: 2px solid #006aff;
-    margin-bottom: 20px;
-    background: linear-gradient(to right, #001a4d, #006aff);
+  width: 114.75px;
+  height: 114.75px;
+  border-radius: 26.775%;
+  overflow: hidden;
+  background-color: #c9cff2;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border: 1.8px solid #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 3);
+  margin-left: 75px;
+  margin-top: 35px;
+  margin-bottom: 30px;
+  position: absolute;
 }
 
 .profileInfo {
-    margin-top: 20px;
-    text-align: center;
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-    background-color: #c1c8c8;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.658);
-}
-
-.formLabel {
-    display: block;
-    margin: 10px 0;
-    color: #001a4d;
-    font-family: 'Orbitron', sans-serif;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.658);
-}
-
-.formInput {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    background-color: #d4c7c7d9;
-    box-shadow: 0 0 10px rgba(18, 17, 17, 0.469);
-}
-
-.submitButton {
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #5577e9;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    font-family: 'Orbitron', sans-serif;
-    margin-top: 10px;
-}
-
-.submitButton:hover {
-    background-color: #001a4d;
-}
-
-.preview {
-    border: 1px solid #001a4d;
-    height: 500px;
-    width: 100%;
-    margin-top: 100px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(15, 14, 14, 0.795);
-    background-color: #fafafa;
-}
-
-.formContainer {
-    margin-top: 50px;
-    margin-left: -700px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.658);
+  flex: 1.8;
+  margin-left: 22.95px;
 }
 
 .previewContainer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 150px;
-    margin-left: 100px;
-    background-color: #fafafab6;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-top: 110px;
+  position: relative;
 }
 
-.previewWrapper,
-.formWrapper {
-    margin: 20px;
-    width: 45%;
-    
+.preview {
+  border: 1px solid #fdfffee6;
+  padding: 22.95px;
+  background-color: #fdfffee6;
+  border-radius: 12.825px;
+  margin-right: 22.95px;
+  margin-top: -17px;
+  margin-bottom: 22.95px;
+  position: absolute;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  width: 250px;
+  height: 353px;
+  margin-left: 10px;
+  overflow: auto; /* Agregar scroll si el contenido es más grande */
 }
 
-.previewWrapper {
-    border-radius: 8px;
-    overflow: hidden;
+.textopreview {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 0px;
+  margin-top: -30px;
 }
-
-.formWrapper {
-    background-color: #fafafa;
-    color: #333;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 
 .titulo {
-    font-size: 2em;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: 'Orbitron', sans-serif;
-    align-items: left 2px;
-    text-align: center;
-    border-bottom: 3px solid blue;
-    margin-top: 30px;
+  color: #0b0b0b;
+
+  border: 1px solid #ecf0f1;
+  width: 200px;
+  border-radius: 12.825px;
+  height: 38.25px;
+  margin-right: 50px;
+  text-align: center;
+  background-color: #ffffffc5;
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.7);
+  margin-left: 35px;
+  margin-top: -60px;
+  margin-bottom: 50px;
+  position: absolute;
 }
 
 .textoPrev p {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-    font-family: 'Orbitron', sans-serif;
-    margin-left: 20px;
-   
+  color: #34495e;
+  font-size: 12px;
+  text-align: left;
+  margin-top: 25px;
 }
 
-.formInput:disabled {
-    background-color: #ddd; 
-    color: #777; 
-    
-  }
+.name {
+  margin-left: 22.95px;
+}
 
-  .formInput {
-    width: 300px; 
-   }
-   
-   .editButton {
-    
-    margin-left: 10px;
-    margin-top: -8px; 
-   }
-   
-   .formGroup {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px; 
-   }
+.containerbotones {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 150px;
+  border-top: 1px solid black;
+  z-index: 1;
+  margin-bottom: 5px;
+  position: absolute;
+  margin-left: 12px;
+  margin-top: 200px;
+}
+.tabContent {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #1d1111;
+  padding: 22.95px;
+  transition: background-color 0.3s ease;
+  color: black;
+  margin-left: 0px;
+  margin-top: -10px;
+}
 
-   .txt{
-    text-align: left;
-    margin-right: 7px;
-   }
+.tabContent:hover {
+  background-color: #c9cff2;
+}
 
-   
-   .form{
+.imageAndTabs {
+  margin-left: -23px;
+  border: 1px solid #fdfffee6;
+  width: 255px;
+  height: 395px;
+  margin-top: 50px;
+  position: absolute;
+  background-color: #ffffffcb;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  margin-left: -232px;
+}
 
-       box-shadow: 0 0 20px rgba(0, 0, 0, 0.658);
-   }
+.imageAndTabs:hover {
+  overflow-y: scroll;
+}
 
-   .googlemap {
-    margin-top: -100px;
-   }
+.imageAndTabs::-webkit-scrollbar {
+  width: 12px;
+}
+
+.imageAndTabs::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+.userProfileFormContainer {
+  height: -10px;
+  width: 50px;
+  margin-left: -140px;
+  margin-top: -65px;
+  position: absolute;
+}
+
+.upload {
+  margin-top: 25px;
+  position: absolute;
+  margin-left: 1px;
+  margin-bottom: 10px;
+}
+
+.text {
+  font-size: 10px;
+  margin-top: 10px;
+  color: #0b0b0b;
+}
+
+.boton1 {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-size: 12px;
+  text-align: center;
+  margin-left: 5px;
+}
+
+.boton1:hover {
+  background-color: #e0e0e0; /* Cambia el color de fondo en el hover según tus preferencias */
+}
+
+.up {
+  position: absolute;
+  margin-top: 90px;
+  margin-left: 5px;
+  text-align: center;
+}
+
+.guardar {
+  margin-top: -2px; /* Ajusta según sea necesario */
+  text-align: center;
+  margin-left: -5px;
+  font-size: 8px;
+  margin-bottom: -5px;
+}
+
+.icono {
+  margin-left: 0px;
+  margin-top: -2px;
+  color: #0b0b0b;
+}

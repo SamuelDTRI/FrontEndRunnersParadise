@@ -27,6 +27,9 @@ import {
   CREATE_USER_REQUEST,
   CREATE_USER_SUCCESS,
   CREATE_USER_FAILURE,
+  POST_CART_ITEMS,
+  GET_ALL_ITEMS,
+  REMOVE_FROM_CART,
   REVIEW_POSTED_FAILURE,
   REVIEW_POSTED_SUCCESS,
   REVIEW_POST_REQUEST,
@@ -36,13 +39,27 @@ import {
   UPDATE_PASSWORD_REQUEST,
   UPDATE_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_FAILURE,
-  LOGIN_SUCCESS,
+  UPDATE_USER_PROFILE_REQUEST,
+  UPDATE_USER_PROFILE_SUCCESS,
+  UPDATE_USER_PROFILE_FAILURE,
+  UPDATE_PROFILE_PICTURE_REQUEST,
+  UPDATE_PROFILE_PICTURE_SUCCESS,
+  UPDATE_PROFILE_PICTURE_FAILURE,
+  UPDATE_USER_PAYMONTH_FAILURE,
+  UPDATE_USER_PAYMONTH_SUCCESS,
+  UPDATE_USER_PAYMONTH_REQUEST,
+  FETCH_USERS_REQUEST,
+  FETCH_USERS_SUCCESS,
+  FETCH_USERS_FAILURE,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE,
+  UPDATE_USER_ADMIN_REQUEST,
+  UPDATE_USER_ADMIN_SUCCESS,
+  UPDATE_USER_ADMIN_FAILURE,
+  DELETE_REVIEW_REQUEST,
+  DELETE_REVIEW_SUCCESS,
+  DELETE_REVIEW_FAILURE,
 } from "../action-types/action-types";
-
-export const loginSuccess = (userData) => ({
-  type: LOGIN_SUCCESS,
-  payload: userData,
-});
 
 export const registerUser = (datauser) => async (dispatch) => {
   dispatch({ type: CREATE_USER_REQUEST });
@@ -93,7 +110,7 @@ export const fetchProductDetail = (idKey) => async (dispatch) => {
 
 export const getSneakers = (
   page,
-  pageSize = "8",
+  pageSize = "6",
   brand,
   colors,
   size,
@@ -126,7 +143,7 @@ export const getSneakers = (
         .map(([key, value]) => `${key}=${value}`)
         .join("&");
 
-      const url = `http://localhost:3000/products?${queryString}`;
+      const url = `https://backendrunnersparadise-production.up.railway.app/products?${queryString}`;
       console.log(url);
       const response = await axios.get(url);
       const sneakersData = response.data;
@@ -163,19 +180,25 @@ export const clearCreateProductState = () => ({
   type: CLEAR_CREATE_PRODUCT_STATE,
 });
 
-export const postCreateProduct = (productData) => async (dispatch) => {
+export const postCreateProduct = (formData) => async (dispatch) => {
   dispatch(createProductRequest());
   try {
     // Lógica para enviar la solicitud al backend y crear el producto
     const response = await axios.post(
       "https://backendrunnersparadise-production.up.railway.app/products/create",
-      productData
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
     console.log(response.data);
     // Si la solicitud fue exitosa
     dispatch(createProductSuccess(response.data));
   } catch (error) {
     // Si la solicitud falla
+    console.error(error);
     dispatch(
       createProductFailure(error.message || "Error al crear el producto")
     );
@@ -288,44 +311,9 @@ export const setSelectedImageIndex = (index) => ({
   payload: index,
 });
 
-const validation = (input, existingNames) => {
-  let errors = {};
-
-  let noEmpty = /\S+/;
-  let validateName = /^[a-zA-ZñÑ\s]*$/;
-
-  if (
-    Array.isArray(existingNames) &&
-    existingNames.some(
-      (name) => name.toLowerCase() === input.name.toLowerCase()
-    )
-  ) {
-    errors.name = "Este nombre ya está en uso. Por favor, elige otro.";
-  } else if (
-    (!noEmpty.test(input.name),
-    !validateName.test(input.name),
-    input.name.trim().length < 3)
-  ) {
-    errors.name = "Nombre necesario. Mayor de 3 letras y único";
-  }
-
-  if (!(input.image instanceof File)) {
-    errors.image = "Debe ser un archivo válido";
-  }
-
-  if (
-    (isNaN(parseFloat(input.price)),
-    parseFloat(input.price) < 1,
-    parseFloat(input.price) > 10000)
-  ) {
-    errors.price = "Ingrese un precio entre 1 y 10000";
-  }
-
-  return errors;
-};
-
 export const postReviews =
-  (productId, rating, content, name, profileImage) => async (dispatch) => {
+  (productId, rating, content, name, surName, profileImage) =>
+  async (dispatch) => {
     dispatch({ type: REVIEW_POST_REQUEST });
     console.log(
       "ESTO RECIBE LA ACTION POSTREVIEW",
@@ -333,17 +321,22 @@ export const postReviews =
       rating,
       content,
       name,
+      surName,
       profileImage
     );
+    const imgDefault =
+      "https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-dt9lf8um.png";
+    const profileImg = profileImage || imgDefault;
     try {
       const response = await axios.post(
-        `http://localhost:3000/reviews/products/detail/${productId}`,
+        `https://backendrunnersparadise-production.up.railway.app/reviews/products/detail/${productId}`,
         {
-          profileImage,
+          profileImage: profileImg,
           productId,
           content,
           rating,
           name,
+          surName,
         }
       );
       console.log("ESTO VIENE DE LA ACTION ", response);
@@ -356,14 +349,14 @@ export const postReviews =
 
 export const setReviews = (reviews) => ({
   type: SET_REVIEWS,
-  payload: reviews || [],
+  payload: reviews,
 });
 
 export const fetchReviews = () => async (dispatch) => {
   try {
     const response = await axios.get(
       "https://backendrunnersparadise-production.up.railway.app/reviews"
-    ); 
+    ); // Update the URL to the correct endpoint
     const data = response.data;
     console.log("TODAS LAS REVIEWS:", data);
     if (Array.isArray(data)) {
@@ -389,18 +382,24 @@ export const updateUserFailure = (error) => ({
   payload: error,
 });
 
+//action para modificar el mail
 export const updateUser = (id, updatedFields) => {
-  return async (dispatch) => {  
+  return async (dispatch) => {
     dispatch(updateUserRequest());
 
     try {
-      const response = await fetch(`http://localhost:3000/users/perfil/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedFields),
-      });
+      console.log("Datos enviados al servidor:", { id, updatedFields });
+
+      const response = await fetch(
+        `https://backendrunnersparadise-production.up.railway.app/users/perfil/update/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedFields),
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
@@ -408,6 +407,7 @@ export const updateUser = (id, updatedFields) => {
 
       dispatch(updateUserSuccess());
     } catch (error) {
+      console.error("Error en la acción:", error);
       dispatch(updateUserFailure(error.message));
     }
   };
@@ -426,13 +426,14 @@ export const updatePasswordFailure = (error) => ({
   payload: error,
 });
 
+//action para el pasww
 export const updatePassword = (id, currentPassword, newPassword) => {
   return async (dispatch) => {
     dispatch(updatePasswordRequest());
 
     try {
       const response = await fetch(
-        `http://localhost:3000/users/perfil/updatepassword/${id}`,
+        `https://backendrunnersparadise-production.up.railway.app/users/perfil/updatepassword/${id}`,
         {
           method: "PUT",
           headers: {
@@ -455,4 +456,287 @@ export const updatePassword = (id, currentPassword, newPassword) => {
       dispatch(updatePasswordFailure(error.message));
     }
   };
+};
+
+export const updateUserProfileRequest = () => ({
+  type: UPDATE_USER_PROFILE_REQUEST,
+});
+
+export const updateUserProfileSuccess = (data) => ({
+  type: UPDATE_USER_PROFILE_SUCCESS,
+  payload: data,
+});
+
+export const updateUserProfileFailure = (error) => ({
+  type: UPDATE_USER_PROFILE_FAILURE,
+  payload: error,
+});
+
+// Acción para modificar cualquier dato del perfil de usuario
+export const updateUserProfileData =
+  (idKey, updatedFields) => async (dispatch) => {
+    dispatch(updateUserProfileRequest());
+
+    try {
+      const response = await axios.put(
+        `https://backendrunnersparadise-production.up.railway.app/users/perfil/${idKey}`,
+        updatedFields
+      );
+
+      dispatch(updateUserProfileSuccess(response.data));
+    } catch (error) {
+      console.error("Error al actualizar datos de usuario:", error);
+      dispatch(
+        updateUserProfileFailure(error.response?.data || "Error en el servidor")
+      );
+    }
+  };
+
+export const updateProfilePictureRequest = () => ({
+  type: UPDATE_PROFILE_PICTURE_REQUEST,
+});
+
+export const updateProfilePictureSuccess = (data) => ({
+  type: UPDATE_PROFILE_PICTURE_SUCCESS,
+  payload: data,
+});
+
+export const updateProfilePictureFailure = (error) => ({
+  type: UPDATE_PROFILE_PICTURE_FAILURE,
+  payload: error,
+});
+
+// action para modificar la foto de perfil
+export const updateProfilePicture =
+  (idKey, updatedFields) => async (dispatch) => {
+    dispatch(updateUserProfileRequest());
+
+    try {
+      const response = await axios.put(
+        `https://backendrunnersparadise-production.up.railway.app/users/profile/picture/${idKey}`,
+        updatedFields
+      );
+
+      dispatch(updateUserProfileSuccess(response.data));
+    } catch (error) {
+      console.error("Error al actualizar datos de usuario:", error);
+      dispatch(
+        updateUserProfileFailure(error.response?.data || "Error en el servidor")
+      );
+    }
+  };
+
+// action para agregar tarjeta
+export const updateUserpay = (userId, paymentMethods) => {
+  return async (dispatch) => {
+    dispatch({ type: UPDATE_USER_PAYMONTH_REQUEST });
+
+    try {
+      const response = await fetch(
+        `https://backendrunnersparadise-production.up.railway.app/users/${userId}/paymentMethods`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(paymentMethods), // Envía solo los datos de la tarjeta, no un objeto anidado
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al actualizar paymentMethods");
+      }
+
+      const updatedProfile = await response.json();
+
+      dispatch({
+        type: UPDATE_USER_PAYMONTH_SUCCESS,
+        payload: updatedProfile,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_USER_PAYMONTH_FAILURE,
+        payload: error.message || "Error al actualizar el perfil del usuario",
+      });
+    }
+  };
+};
+
+//action para modificar usuarios desde admin
+
+const fetchUsersRequest = () => ({
+  type: FETCH_USERS_REQUEST,
+});
+
+const fetchUsersSuccess = (users) => ({
+  type: FETCH_USERS_SUCCESS,
+  payload: users,
+});
+
+const fetchUsersFailure = (error) => ({
+  type: FETCH_USERS_FAILURE,
+  payload: error,
+});
+
+export const fetchUsers = () => {
+  return async (dispatch) => {
+    dispatch(fetchUsersRequest());
+
+    try {
+      const response = await axios.get(
+        "https://backendrunnersparadise-production.up.railway.app/users/"
+      ); // Assuming your endpoint is '/users'
+
+      dispatch(fetchUsersSuccess(response.data));
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      dispatch(fetchUsersFailure("Error fetching users"));
+    }
+  };
+};
+
+//action para eliminar usuarios
+export const deleteUser = (userId) => async (dispatch) => {
+  try {
+    await axios.delete(
+      `https://backendrunnersparadise-production.up.railway.app/users/delete/${userId}`
+    );
+
+    dispatch({
+      type: DELETE_USER_SUCCESS,
+      payload: userId,
+    });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    dispatch({
+      type: DELETE_USER_FAILURE,
+      payload: error.message || "Failed to delete user",
+    });
+  }
+};
+
+//action para modificar los datos del usuario desde admin
+const updateUserAdminRequest = () => ({
+  type: UPDATE_USER_ADMIN_REQUEST,
+});
+
+const updateUserAdminSuccess = (user) => ({
+  type: UPDATE_USER_ADMIN_SUCCESS,
+  payload: user,
+});
+
+const updateUserAdminFailure = (error) => ({
+  type: UPDATE_USER_ADMIN_FAILURE,
+  payload: error,
+});
+
+export const updateUserAdmin = (userId, userData) => async (dispatch) => {
+  dispatch(updateUserAdminRequest());
+
+  try {
+    const response = await axios.put(
+      `https://backendrunnersparadise-production.up.railway.app/users/eddituseradmin/${userId}`,
+      userData
+    );
+
+    dispatch(updateUserAdminSuccess(response.data)); // Puedes ajustar esto según la estructura de tu respuesta
+  } catch (error) {
+    console.error("Error updating user by admin:", error);
+    dispatch(updateUserAdminFailure("Error updating user by admin"));
+  }
+};
+
+export const addPaymentMethod = (paymentInfo) => {
+  return async (dispatch) => {
+    dispatch({ type: ADD_PAYMENT_METHOD_REQUEST });
+    try {
+      const response = await axios.post(
+        "https://backendrunnersparadise-production.up.railway.app/users/addPayment",
+        paymentInfo
+      );
+      dispatch({
+        type: ADD_PAYMENT_METHOD_SUCCESS,
+        payload: response.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ADD_PAYMENT_METHOD_FAILURE,
+        payload: error.response.data,
+      });
+    }
+  };
+};
+
+export const postCartItems =
+  (userId, productId, itemsData) => async (dispatch) => {
+    try {
+      const response = await axios.post(
+        `https://backendrunnersparadise-production.up.railway.app/cart/${userId}/${productId}`,
+        itemsData
+      );
+      const item = response.data;
+      console.log(item);
+      dispatch({
+        type: POST_CART_ITEMS,
+        payload: {
+          items: item,
+        },
+      });
+    } catch (error) {
+      dispatch(createProductFailure(error.message || "Error al añadir"));
+    }
+  };
+
+export const getAllItems = (userId) => async (dispatch) => {
+  dispatch({ type: GET_ALL_ITEMS });
+  try {
+    const response = await axios.get(
+      `https://backendrunnersparadise-production.up.railway.app/cart/${userId}`
+    );
+    dispatch({ type: GET_ALL_ITEMS, payload: response.data.CartItems });
+  } catch (error) {
+    console.error("Error fetching items:", error);
+    alert("Not found this data.");
+  }
+};
+
+export const removeFromCart = (productId) => async (dispatch) => {
+  dispatch({ type: REMOVE_FROM_CART });
+  try {
+    await axios.delete(
+      `https://backendrunnersparadise-production.up.railway.app/cart/1/${productId}`
+    );
+    dispatch({ type: REMOVE_FROM_CART, payload: { productId } });
+  } catch (error) {
+    console.error("Error removing item from cart:", error);
+    alert("Error removing item from cart. Please try again.");
+  }
+};
+
+export const deleteReviewRequest = () => ({
+  type: DELETE_REVIEW_REQUEST,
+});
+
+export const deleteReviewSuccess = () => ({
+  type: DELETE_REVIEW_SUCCESS,
+});
+
+export const deleteReviewFailure = (error) => ({
+  type: DELETE_REVIEW_FAILURE,
+  payload: error,
+});
+
+// Acción asincrónica para eliminar la revisión
+export const deleteReview = (productId, reviewId) => async (dispatch) => {
+  try {
+    dispatch(deleteReviewRequest());
+
+    await axios.delete(
+      `https://backendrunnersparadise-production.up.railway.app/reviews/delete/${productId}/${reviewId}`
+    );
+
+    dispatch(deleteReviewSuccess());
+  } catch (error) {
+    dispatch(deleteReviewFailure(error.message));
+  }
 };

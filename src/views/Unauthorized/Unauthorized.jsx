@@ -13,24 +13,25 @@ const Unauthorized = () => {
       <p className={styles.message}>
         Lo sentimos, como comprador, no tienes los permisos necesarios para
         crear productos.
-      </p> 
+      </p>
       {/* //toco poner esto para los espacios {" "} */}
       <p className={styles.info}>
-        Unicamente tienes acceso a esta ruta si eres un
-        administrador. Puedes dirigirte a{" "}
+        Unicamente tienes acceso a esta ruta si eres un administrador. Puedes
+        dirigirte a{" "}
         <Link to="/home" className={styles.link}>
           Home
-        </Link>{" "} 
-        para continuar con tus compras o{" "} 
+        </Link>{" "}
+        para continuar con tus compras o{" "}
         <Link to="/login" className={styles.link}>
           iniciar sesion
         </Link>{" "}
-        con otra cuenta si tienes rol de aministrador. Si no tienes una cuenta con
-        otro rol,{" "}
+        con otra cuenta si tienes rol de aministrador. Si no tienes una cuenta
+        con otro rol,{" "}
         <Link to="/register" className={styles.link}>
           registrate aqui
         </Link>{" "}
-        con rol de administrador para que puedas tener una experiencia aun mejor.
+        con rol de administrador para que puedas tener una experiencia aun
+        mejor.
       </p>
     </div>
   );

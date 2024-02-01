@@ -25,20 +25,43 @@ import {
   SET_ADMIN,
   SET_SELECTED_IMAGE_INDEX,
   LOGIN_USER,
-  REVIEW_POSTED_FAILURE,
-  REVIEW_POSTED_SUCCESS,
+  POST_CART_ITEMS,
+  GET_ALL_ITEMS,
+  REMOVE_FROM_CART,
   REVIEW_POST_REQUEST,
+  REVIEW_POSTED_SUCCESS,
+  REVIEW_POSTED_FAILURE,
+  UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
-  UPDATE_USER_REQUEST,
   UPDATE_PASSWORD_REQUEST,
   UPDATE_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_FAILURE,
-  LOGIN_SUCCESS,
-  LOGOUT,
+  UPDATE_USER_PROFILE_REQUEST,
+  UPDATE_USER_PROFILE_SUCCESS,
+  UPDATE_USER_PROFILE_FAILURE,
+  UPDATE_PROFILE_PICTURE_REQUEST,
+  UPDATE_PROFILE_PICTURE_SUCCESS,
+  UPDATE_PROFILE_PICTURE_FAILURE,
+  UPDATE_PROFILE_PICTURE,
+  UPDATE_USER_PAYMONTH_FAILURE,
+  UPDATE_USER_PAYMONTH_SUCCESS,
+  UPDATE_USER_PAYMONTH_REQUEST,
+  FETCH_USERS_REQUEST,
+  FETCH_USERS_SUCCESS,
+  FETCH_USERS_FAILURE,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE,
+  UPDATE_USER_ADMIN_REQUEST,
+  UPDATE_USER_ADMIN_SUCCESS,
+  UPDATE_USER_ADMIN_FAILURE,
+  DELETE_REVIEW_SUCCESS,
+  DELETE_REVIEW_REQUEST,
+  DELETE_REVIEW_FAILURE,
 } from "../action-types/action-types";
 
 const initialState = {
+  loading: false,
   product: {
     detail: null,
     createdProduct: null,
@@ -62,6 +85,7 @@ const initialState = {
   selectedImageIndex: [],
   login: {},
   loading: false,
+  error: null,
   auth: {
     loading: false,
   },
@@ -72,6 +96,14 @@ const initialState = {
   searchData: null,
   isAdmin: false,
   updateUserError: null,
+  profilePicture: "",
+  isUpdatingProfilePicture: false,
+  updateProfilePictureError: null,
+  users: [],
+  updatingUserAdmin: false,
+  updateUserAdminError: null,
+  shoppingItems: [],
+  products: [],
 };
 const stateSearchBar = {
   data: null,
@@ -82,24 +114,6 @@ const stateSearchBar = {
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        auth: {
-          isAuthenticated: true,
-          userData: action.payload,
-        },
-      };
-
-    case LOGOUT:
-      return {
-        ...state,
-        auth: {
-          isAuthenticated: false,
-          userData: null,
-        },
-      };
-
     case POST_PRODUCT_REQUEST:
       return {
         ...state,
@@ -344,6 +358,169 @@ const productReducer = (state = initialState, action) => {
         passwordAndEmailUpdateError: action.payload,
       };
 
+    case UPDATE_USER_PROFILE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case UPDATE_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+    case UPDATE_USER_PROFILE_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case UPDATE_PROFILE_PICTURE_REQUEST:
+      return {
+        ...state,
+        isUpdatingProfilePicture: true,
+        updateProfilePictureError: null,
+      };
+
+    case UPDATE_PROFILE_PICTURE_SUCCESS:
+      return {
+        ...state,
+        profilePicture: action.payload,
+        isUpdatingProfilePicture: false,
+        updateProfilePictureError: null,
+      };
+
+    case UPDATE_PROFILE_PICTURE_FAILURE:
+      return {
+        ...state,
+        isUpdatingProfilePicture: false,
+        updateProfilePictureError: action.payload,
+      };
+    //caso para subir la imagen a cloudinary
+    case UPDATE_PROFILE_PICTURE:
+      const { userId, data } = action.payload;
+      const updatedUsers = state.users.map((user) =>
+        user.id === userId
+          ? { ...user, profilePicture: data.profilePicture }
+          : user
+      );
+
+    case UPDATE_USER_PAYMONTH_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        success: false,
+      };
+    case UPDATE_USER_PAYMONTH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        success: true,
+      };
+    case UPDATE_USER_PAYMONTH_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        success: false,
+      };
+
+    case FETCH_USERS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+
+    case FETCH_USERS_SUCCESS:
+      return {
+        ...state,
+        users: action.payload,
+        loading: false,
+        error: null,
+      };
+
+    case FETCH_USERS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        users: state.users.filter((user) => user.id !== action.payload),
+        error: null,
+      };
+    case DELETE_USER_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
+
+    case UPDATE_USER_ADMIN_REQUEST:
+      return {
+        ...state,
+        updatingUserAdmin: true,
+        updateUserAdminError: null,
+      };
+
+    case UPDATE_USER_ADMIN_SUCCESS:
+      return {
+        ...state,
+        updatingUserAdmin: false,
+        updateUserAdminError: null,
+      };
+
+    case UPDATE_USER_ADMIN_FAILURE:
+      return {
+        ...state,
+        updatingUserAdmin: false,
+        updateUserAdminError: action.payload,
+      };
+
+    case POST_CART_ITEMS:
+      return {
+        ...state,
+        itemsCart: action.payload,
+      };
+
+    case GET_ALL_ITEMS:
+      return {
+        ...state,
+        shoppingItems: action.payload || [],
+      };
+
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        shoppingItems: state.shoppingItems.filter(
+          (item) => item.productId !== action.payload?.productId
+        ),
+      };
+
+    case DELETE_REVIEW_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case DELETE_REVIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case DELETE_REVIEW_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
     default:
       return state;
   }

@@ -61,7 +61,6 @@ function Filter({ page, pageSize }) {
           ]}
           onChange={(e) => handleFilterBrand(e.target.value)}
         />
-
         <Select
           name="FilterColor"
           options={[
@@ -76,7 +75,6 @@ function Filter({ page, pageSize }) {
           ]}
           onChange={(e) => handleFilterColor(e.target.value)}
         />
-
         <Select
           name="FilterSize"
           options={[
@@ -90,7 +88,6 @@ function Filter({ page, pageSize }) {
           ]}
           onChange={(e) => handleFilterSize(e.target.value)}
         />
-
         <Select
           name="orderPrice"
           options={[

@@ -1,280 +1,322 @@
-import React, { useState } from "react";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-import styles from './perfil.module.css';
-import MapContainer from './googleMap';
-import { useCallback } from 'react';
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../AuthProvider/authProvider";
+import {
+  FaLock,
+  FaEnvelope,
+  FaUser,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaImage,
+} from "react-icons/fa";
+import { Tabs, Tab, Typography, Box } from "@mui/material";
+import UserProfileForm from "../perfilDeUsuario/edditProfile";
+import ChangePasswordForm from "../perfilDeUsuario/edditPass";
+import UserMail from "../perfilDeUsuario/edditMail";
+import { Button, IconButton } from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { Input } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { updateProfilePicture } from "../../redux/actions/actions";
+import styles from "./perfil.module.css";
 
 const UserProfile = () => {
+  const { auth, updateUserData } = useContext(AuthContext);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imageModified, setImageModified] = useState(false);
+  const dispatch = useDispatch();
+  const [imageUrl, setImageUrl] = useState("");
+
   const [userData, setUserData] = useState({
     name: "",
     profilePicture: "",
     phone: "",
     address: "",
     country: "",
+    email: "",
+    paymentMethods: "",
   });
+  const [value, setValue] = useState(0);
 
-  const [isFormChanged, setIsFormChanged] = useState(false);
-  const [uploadedImage, setUploadedImage] = useState(null);
-  const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
+  useEffect(() => {
+    if (auth && auth.token) {
+      const {
+        name,
+        email,
+        phone,
+        address,
+        country,
+        profilePicture,
+        paymentMethods,
+      } = auth.token;
+      setUserData({
+        name: name || "",
+        profilePicture: profilePicture || "",
+        phone: phone || "",
+        address: address || "",
+        country: country || "",
+        email: email || "",
+        paymentMethods: paymentMethods || null, // No necesitas usar JSON.parse aquí
+      });
+    }
+  }, [auth, dispatch]);
 
-
-  const [isEditing, setIsEditing] = useState({
-    profilePicture: false,
-    name: false,
-    phone: false,
-    address: false,
-    country: false,
-  });
-
-  const handleEditClick = (fieldName) => {
-    setIsEditing((prevIsEditing) => ({
-      ...prevIsEditing,
-      [fieldName]: true,
-    }));
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setImageUrl(file ? URL.createObjectURL(file) : "");
+    setSelectedFile(file);
+    setImageModified(true);
   };
 
-  const handleLocationChange = useCallback(async (address) => {
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ address }, (results, status) => {
-       if (status === "OK") {
-         const location = results[0].geometry.location;
-         setCoordinates({ lat: location.lat(), lng: location.lng() });
-       } else {
-         console.error(`Geocode was not successful for the following reason: ${status}`);
-       }
-    });
-   }, []);
-
-  const handleSaveClick = (e) => {
-    e.preventDefault();
-    setIsEditing({
-      profilePicture: false,
-      name: false,
-      phone: false,
-      address: false,
-      country: false,
-    });
-    setIsFormChanged(false);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    setIsFormChanged(true);
-
-   
-    if (name === 'country' || name === 'address') {
-      handleLocationChange(value);
+  const handleSaveImageClick = async () => {
+    if (imageModified && selectedFile) {
+      try {
+        const fileName = selectedFile.name;
+        dispatch(
+          updateProfilePicture(auth.token.id, { profilePicture: fileName })
+        );
+        setImageModified(false);
+      } catch (error) {
+        console.error("Error updating image:", error);
+      }
     }
   };
 
-  const handlePictureChange = (e) => {
-    const file = e.target.files[0];
-  
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setUploadedImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+  class ErrorBoundary extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { hasError: false };
     }
-  
-    setIsFormChanged(true);
+
+    static getDerivedStateFromError(error) {
+      return { hasError: true };
+    }
+
+    componentDidCatch(error, errorInfo) {
+      console.error("Error boundary caught an error:", error, errorInfo);
+    }
+
+    render() {
+      if (this.state.hasError) {
+        return <p>Error en el componente UserProfile.</p>; // Puedes personalizar el mensaje de error
+      }
+
+      return this.props.children;
+    }
+  }
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
   };
 
-  const handleBannerChange = (e) => {
-    const bannerUrl = e.target.value;
-    setUserData((prevData) => ({
-      ...prevData,
-      banner: bannerUrl,
-    }));
-    setIsFormChanged(true);
+  const renderComponent = () => {
+    switch (value) {
+      case 0:
+        return <UserProfileForm />;
+      case 1:
+        return <UserMail />;
+      case 2:
+        return <ChangePasswordForm />;
+      default:
+        return null;
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Datos actualizados:", userData);
-   
-    setIsEditing({
-      profilePicture: false,
-      name: false,
-      phone: false,
-      address: false,
-      country: false,
-    });
-  };
+  return (
+    <div className={styles.Fullstack}>
+      <div className={styles.Full}>
+        <div className={styles.supercontainer}>
+          <div className={styles.container}>
+            <div className={styles.banner} />
+            <div className={styles.userProfile}>
+              <div className={styles.imageAndTabs}>
+                <div className={styles.imageContainer}>
+                  <div
+                    className={styles.profilePicture}
+                    style={{
+                      backgroundImage: userData.profilePicture
+                        ? `url(${userData.profilePicture})`
+                        : "none",
+                    }}
+                  >
+                    {!userData.profilePicture && (
+                      <div>
+                        <p>No hay imagen</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className={styles.upload}>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    className={styles.fileInputContainer}
+                  >
+                    <React.Fragment>
+                      <Input
+                        type="file"
+                        id="profilePicture"
+                        name="profilePicture"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        className={styles.fileInput}
+                        style={{ display: "none" }}
+                      />
+                      <label htmlFor="profilePicture" className={styles.boton1}>
+                        <FaImage /> <br />
+                        Add img
+                      </label>
+                    </React.Fragment>
+                  </Box>
+                </div>
 
-  const areAnyInputsEditing = Object.values(isEditing).some(Boolean);
+                <div className={styles.up}>
+                  <Button
+                    className={styles.boton}
+                    onClick={handleSaveImageClick}
+                  >
+                    <div className={styles.icono}>
+                      <CloudUploadIcon />
+                      <p className={styles.guardar}>
+                        Guardar <br /> Imagen
+                      </p>
+                    </div>
+                  </Button>
+                </div>
 
- return (
-  <div className={styles.userProfile}>
-     <div className={styles.banner} />
-     <div className={styles.profileContainer}>
-       <div className={styles.imageContainer}>
-      <div className={styles.profilePicture}>
-  {uploadedImage ? (
-    <img src={uploadedImage} alt="Perfil" />
-  ) : (
-    <p className={styles.altText}>Carga tu imagen</p>
-  )}
-</div>
-</div>  
-       <div className={styles.profileInfo}>
-       </div>
-       <div className={styles.formContainer}>
-         <div className={styles.previewContainer}>
-           <div className={styles.previewWrapper}>
-             <div className={styles.preview}>
-              <div className={styles.textopreview}>
-
-               <h2 className={styles.titulo}>Tus Datos</h2>
-               <div className={styles.textoPrev}><br /><br />
-
-               <p>Name: {userData.name}</p> <br /><br />
-               <p>Phone: {userData.phone}</p><br /><br />
-               <p>Address: {userData.address}</p><br /><br />
-               <p>Country: {userData.country}</p><br /><br />
-               <div className={styles.googlemap}>
-
-               <MapContainer lat={coordinates.lat} lng={coordinates.lng} />
-               </div>
-               </div>
-
+                <ul className={styles.containerbotones}>
+                  <li className={value === 0 ? styles.selected : ""}>
+                    <div
+                      className={styles.tabContent}
+                      onClick={() => handleChange(0)}
+                    >
+                      <FaUser style={{ marginRight: "30px" }} />
+                      <Typography>Cambiar Datos</Typography>
+                    </div>
+                  </li>
+                  <li className={value === 1 ? styles.selected : ""}>
+                    <div
+                      className={styles.tabContent}
+                      onClick={() => handleChange(1)}
+                    >
+                      <FaEnvelope style={{ marginRight: "30px" }} />
+                      <Typography>Cambiar Email</Typography>
+                    </div>
+                  </li>
+                  <li className={value === 2 ? styles.selected : ""}>
+                    <div
+                      className={styles.tabContent}
+                      onClick={() => handleChange(2)}
+                    >
+                      <FaLock style={{ marginRight: "30px" }} />
+                      <Typography>Cambiar Password</Typography>
+                    </div>
+                  </li>
+                </ul>
               </div>
-             </div>
-           </div>
-           <div className={styles.formWrapper}>
-                 <div className={styles.formm}>
-                  
-             <Tabs>
-               <TabList>
-                 <Tab>Perfil</Tab>
-               </TabList>
-               <TabPanel>
-              <form onSubmit={handleSubmit}>
-              <div style={{display: 'flex', flexDirection: 'column', gap: '3rem', justifyContent: 'flex-start',}}>
-              <div style={{display: 'flex', alignItems: 'center'}}>
-              <div className={styles.formGroup}>
-            <label htmlFor="formProfilePicture">Foto de Perfil</label>
-            <input
-                id="formProfilePicture"
-                type="file"
-                placeholder="URL de la foto de perfil"
-                name="profilePicture"
-                value={userData.profilePicture}
-                onChange={handlePictureChange}
-                className={styles.formInput}
-                disabled={!isEditing.profilePicture}
-            />
-                          <button
-                type="button"
-                onClick={() => handleEditClick('profilePicture')}
-                className={styles.editButton}
-              >
-                Editar
-              </button>
+              {/* los datos de usuario */}
+              <div className={styles.profileInfo}>
+                <div className={styles.previewContainer}>
+                  <div className={styles.previewWrapper}>
+                    <h4 className={styles.titulo}>Tus Datos</h4>
+                    <div className={styles.preview}>
+                      <div className={styles.textopreview}>
+                        <div className={styles.textoPrev}>
+                          <p className={styles.name}>
+                            <strong>
+                              {" "}
+                              <FaUser /> Name:{" "}
+                            </strong>
+                            {userData.name}
+                          </p>
+                          <p className={styles.name}>
+                            <strong>
+                              {" "}
+                              <FaPhone /> Phone:{" "}
+                            </strong>{" "}
+                            {userData.phone}
+                          </p>
+                          <p className={styles.name}>
+                            <strong>
+                              {" "}
+                              <FaMapMarkerAlt /> Address:{" "}
+                            </strong>
+                            {userData.address}
+                          </p>
+                          <p className={styles.name}>
+                            <strong>
+                              {" "}
+                              <FaMapMarkerAlt /> Country:{" "}
+                            </strong>
+                            {userData.country}
+                          </p>
+                          <p className={styles.name}>
+                            <strong>
+                              {" "}
+                              <FaEnvelope /> Email:{" "}
+                            </strong>
+                            {userData.email}
+                          </p>
+                          <p className={styles.name}>
+                            <strong>
+                              {" "}
+                              <FaLock /> Password: *********{" "}
+                            </strong>
+                          </p>
+                          <p className={styles.name}>
+                            <strong>
+                              {" "}
+                              <FaImage /> Profile Picture:{" "}
+                            </strong>
+                            {userData.profilePicture}
+                          </p>
+                          <p className={styles.name}>
+                            <strong>
+                              <FaImage /> Métodos de pago:
+                            </strong>
+                          </p>
+                          {userData.paymentMethods &&
+                            userData.paymentMethods.length > 0 && (
+                              <div>
+                                <p className={styles.name}>
+                                  <strong>Número:</strong>{" "}
+                                  {userData.paymentMethods[0].number ??
+                                    "No disponible"}
+                                </p>
+                                <p className={styles.name}>
+                                  <strong>Marca:</strong>{" "}
+                                  {userData.paymentMethods[0].brand ??
+                                    "No disponible"}
+                                </p>
+                                <p className={styles.name}>
+                                  <strong>Fecha de vencimiento:</strong>{" "}
+                                  {userData.paymentMethods[0].expirationDate ??
+                                    "No disponible"}
+                                </p>
+                                <p className={styles.name}>
+                                  <strong>CVV:</strong>{" "}
+                                  {userData.paymentMethods[0].cvv ??
+                                    "No disponible"}
+                                </p>
+                              </div>
+                            )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* componentes renderizandose */}
+                  <div className={styles.userProfileFormContainer}>
+                    <ErrorBoundary>{renderComponent()}</ErrorBoundary>
+                  </div>
+                </div>
+                <div className={styles.profileimage}></div>
               </div>
-              </div>
-              <div className={styles.formGroup}>
-
-              <div style={{display: 'flex', alignItems: 'center'}}>
-              <label htmlFor="formName" className={styles.txt}>Nombre</label>
-              <input
-              id="formName"
-              type="text"
-              placeholder="Nombre"
-              name="name"
-              value={userData.name}
-              onChange={handleChange}
-              className={styles.formInput}
-              disabled={!isEditing.name}
-              />
-              <button type="button" onClick={() => handleEditClick('name')} className={styles.editButton}>
-                Editar
-              </button> 
-              </div>
-              </div>
-
-              <div className={styles.formGroup}>
-              <div style={{display: 'flex', alignItems: 'center'}}>
-              <label htmlFor="formName" className={styles.txt}>Telefono</label>
-              <input
-             id="formPhone"
-              type="text"
-              placeholder="Teléfono"
-             name="phone"
-            value={userData.phone}
-            onChange={handleChange}
-            className={styles.formInput}
-            disabled={!isEditing.phone}
-            />
-            <button type="button" onClick={() => handleEditClick('phone')} className={styles.editButton}>
-             Editar
-          </button>
-          </div>
-          </div>
-
-          <div className={styles.formGroup}>
-
-          <div style={{display: 'flex', alignItems: 'center'}}>
-            <label htmlFor="formAddress" className={styles.txt}>Dirección</label>
-            <input
-                id="formAddress"
-                type="text"
-                placeholder="Dirección"
-                name="address"
-                value={userData.address}
-                onChange={handleChange}
-                className={styles.formInput}
-                disabled={!isEditing.address}
-            />
-            <button type="button" onClick={() => handleEditClick('address')} className={styles.editButton}>
-             Editar
-          </button>
             </div>
           </div>
-
-          <div className={styles.formGroup}>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-          <label htmlFor="formCountry" className={styles.txt}>Ciudad</label>
-            <input
-                id="formCountry"
-                type="text"
-                placeholder="Ciudad"
-                name="country"
-                value={userData.country}
-                onChange={handleChange}
-                className={styles.formInput}
-                disabled={!isEditing.country}
-            />
-            <button type="button" onClick={() => handleEditClick('country')} className={styles.editButton}>
-             Editar
-          </button>
-          </div>
-          </div>
-          </div>
-
-          <button
-        type="submit"
-        className={styles.submitButton}
-        disabled={!areAnyInputsEditing}
-      >
-        Guardar Cambios
-      </button>
-          </form>
-        </TabPanel>
-      </Tabs>
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
- );
+  );
 };
 
 export default UserProfile;

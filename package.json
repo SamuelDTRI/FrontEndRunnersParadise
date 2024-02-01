@@ -16,6 +16,8 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mercadopago/sdk-react": "^0.0.16",
+    "@mui/icons-material": "^5.15.7",
     "@mui/material": "^5.15.4",
     "@react-google-maps/api": "^2.19.2",
     "@react-oauth/google": "^0.12.1",
@@ -25,16 +27,16 @@
     "gapi-script": "^1.2.0",
     "polished": "^4.2.2",
     "popper.js": "^1.16.1",
-    "react": "^18.0.0",
+    "react": "^18.2.0",
     "react-bootstrap": "^2.10.0",
-    "react-dom": "^18.0.0",
+    "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-google-login": "^5.2.2",
+    "react-hook-form": "^7.49.3",
     "react-icons": "^5.0.0",
     "react-image-gallery": "^1.3.0",
     "react-image-upload": "^3.0.1",
     "react-images-upload": "^1.2.8",
-    
     "react-redux": "^7.2.9",
     "react-router-dom": "^5.3.4",
     "react-select": "^5.8.0",
@@ -43,7 +45,6 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
     "uuid": "^9.0.1"
-   
   },
   "devDependencies": {
     "@types/react": "^18.2.48",

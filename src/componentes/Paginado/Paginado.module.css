@@ -1,44 +1,42 @@
-.container{
-    z-index: 300;
-    height: 40px;
-    position: absolute;
-    top:58px;
-    right: 50px;
+.container {
+  z-index: 300;
+  height: 40px;
+  position: absolute;
+  top: 58px;
+  right: 50px;
 }
 
-.container span{
-    font-weight: 700;
-    font-size: 12px;
-    position: relative;
-    top: -4px;
+.container span {
+  font-weight: 700;
+  font-size: 12px;
+  position: relative;
+  top: -4px;
 }
 
-.buttons{
-    font-size: 24px;
-    font-weight: 500;
-    display: inline-block;
-    margin: 0 auto;
-    color: black;
-    background:none;
-    text-align: center;
-    justify-content: center;
-    position: relative;
+.buttons {
+  font-size: 24px;
+  font-weight: 500;
+  display: inline-block;
+  margin: 0 auto;
+  color: black;
+  background: none;
+  text-align: center;
+  justify-content: center;
+  position: relative;
 }
 
-.buttons button{
-    cursor: pointer;
+.buttons button {
+  cursor: pointer;
 }
 
-
-.buttons:hover{
-    background: none;
-    scale: 120%;
+.buttons:hover {
+  background: none;
+  scale: 120%;
 }
-
 
 @media (max-width: 768px) {
-    .container{
-        position: absolute;
-        left: -1000px;
-    }
+  .container {
+    position: absolute;
+    left: -1000px;
+  }
 }

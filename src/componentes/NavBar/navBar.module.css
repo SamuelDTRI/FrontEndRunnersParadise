@@ -1,69 +1,210 @@
-.img{
-    height: 15%;
+.img {
+  height: 15%;
 }
 
-.logoRunners{
-    margin: 0 auto;
-    width: 140px;
-    height: 50px;
+.logoRunners {
+  margin: 0 auto;
+  width: 140px;
+  height: 50px;
 }
 
-.navContainer{
-    background-color: black;
+.navContainer {
+  background-color: black;
 }
 
-.searchBarContainer{
-    position: relative;
-    left: -300px;
-    top: 10px;
+.searchBarContainer {
+  position: relative;
+  left: -300px;
+  top: 10px;
 }
 
-.userContent{
-    position: relative;
-    display: flex;
-    left: 70px;
+.userContent {
+  position: relative;
+  display: flex;
+  left: 70px;
 }
 
-.userContent h4{
-    font-weight: 300;
-    position: relative;
-    top: 12px;
-    margin-left: 4px;
-    margin-right: 2px;
-    height: 30px;
-    font-size: 16px;
+.userContent h4 {
+  font-weight: 300;
+  position: relative;
+  top: 12px;
+  margin-left: 4px;
+  margin-right: 2px;
+  height: 30px;
+  font-size: 16px;
 }
 
-.userImage{
-    height: 30px;
+.userImage {
+  height: 30px;
 }
 
-
-.searchBarContent{
-    position: relative;
-    top: 10px;
-    left: -110px;
+.searchBarContent {
+  position: relative;
+  top: 10px;
+  left: -110px;
 }
 
-.navUser img{
-    position:relative;
-    left: -20px;
+.navUser img {
+  position: relative;
+  left: -20px;
 }
 
-.navBarContent{
-    position: relative;
-    left: 60px;
+.navBarContent {
+  position: relative;
+  left: 60px;
 }
 
-.navBarContentFirst{
-    position: relative;
-    left: 70px;
-    top: 1px;
+.navBarContentFirst {
+  position: relative;
+  left: 70px;
+  top: 1px;
 }
 
 @media (max-width: 768px) {
-    .navBarContent{
-        width: 10vh;
-        position: relative;
-    }
+  .navBarContent {
+    width: 10vh;
+    position: relative;
+  }
+}
+
+.img {
+  height: 15%;
+}
+
+.logoRunners {
+  margin: 0 auto;
+  width: 140px;
+  height: 50px;
+}
+
+.navContainer {
+  background-color: black;
+}
+
+.userContent {
+  position: relative;
+  display: flex;
+  left: 30px;
+  top: -1px;
+}
+
+.imgContent {
+  position: relative;
+  left: -40px;
+}
+
+.userContent h4 {
+  font-weight: 300;
+  position: relative;
+  top: 12px;
+  margin-left: 4px;
+  margin-right: 2px;
+  height: 30px;
+  font-size: 16px;
+  left: 60px;
+}
+
+.userImage {
+  height: 30px;
+}
+
+.navUser img {
+  position: relative;
+  left: -20px;
+}
+
+.navBarContent {
+  position: relative;
+  left: -4px;
+}
+
+.navBarContentFirst {
+  position: relative;
+  top: 1px;
+}
+
+.itemsContent {
+  position: relative;
+  left: 960px;
+}
+
+.navBarAllContent {
+  display: flex;
+}
+
+.imgUser {
+  position: relative;
+}
+
+.navBarContainer img {
+  position: relative;
+  left: -40px;
+}
+
+.navButton {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .navButton {
+    display: block;
+    position: relative;
+    left: 8.4rem;
+    background: none;
+    color: white;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+  }
+
+  .navButton:hover {
+    background-color: rgb(227, 227, 227);
+  }
+
+  .navButton span {
+    position: relative;
+    top: -9px;
+    left: -7px;
+    color: black;
+  }
+
+  .navBarContent {
+    display: none;
+  }
+
+  .navBarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: black;
+  }
+
+  .navBarContainer img {
+    display: block;
+    height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .navBarAllContent {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navBarContentFirst {
+    order: 2;
+  }
+
+  .navBarContent,
+  .itemsContent {
+    display: none;
+  }
+
+  .navUser img {
+    position: relative;
+    left: 0;
+  }
 }

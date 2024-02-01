@@ -179,31 +179,3 @@
 .back1 {
   margin-top: 20px;
 }
-
-@media (max-width: 768px) {
-  .container {
-    top: 50px; /* Ajusta según tus necesidades */
-  }
-
-  .cuadrante,
-  .agradecimientos,
-  .about {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 20px;
-    margin-top: 0;
-  }
-
-  .agradecimientos {
-    height: auto;
-  }
-
-  .cuadrante,
-  .agradecimientos:hover {
-    transform: scale(1);
-  }
-
-  .socialIcons {
-    top: 0;
-  }
-}

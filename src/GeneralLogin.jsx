@@ -1,18 +1,16 @@
 import React, { useContext, useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { AuthContext } from "./componentes/AuthProvider/authProvider";
 
 const ProtectedRoute = ({
   component: Component,
-  allowedRoles,
   redirectUnauthorized,
   ...rest
 }) => {
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log("Valor actualizado de auth en generlaLoginxd:", auth);
+    console.log("Valor actualizado de auth en generalLoginxd:", auth);
   }, [auth]);
 
   return (
@@ -21,15 +19,13 @@ const ProtectedRoute = ({
       render={(props) => {
         if (auth && auth.token) {
           console.log("esto es authGeneralLogin:", auth);
-          if (auth.token.admin === true) {
+          if (auth.token.rol === "admin" || auth.token.rol === "seller") {
             return <Component {...props} />;
+          } else if (auth.token.rol === "buyer" && redirectUnauthorized) {
+            return <Redirect to="/unauthorized" />;
           } else {
-            console.log("No se paso user o es undefined");
-            if (redirectUnauthorized) {
-              return <Redirect to="/unauthorized" />;
-            } else {
-              return null;
-            }
+            console.log("No se pasó el usuario o es undefined");
+            return <Redirect to="/unauthorized" />;
           }
         } else {
           return <Redirect to="/login" />;

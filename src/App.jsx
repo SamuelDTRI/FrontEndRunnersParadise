@@ -8,10 +8,11 @@ import Create from "./componentes/Create/create";
 import LogIn from "./componentes/LogInForm/LogIn";
 import About from "./componentes/About/about";
 import Registro from "./componentes/Register/Register";
-import Perfil from "./componentes/perfilDeUsuario/perfil";
-import Ajustes from "./componentes/Configuracion/configuracion";
-import ProtectedRoute from "./GeneralLogin";
+import AdminDashboard from "./componentes/DashBoard Admin/dashBoard";
+import UserDashboard from "./componentes/DashBoard Usuario/dashBoard";
 import { AuthProvider } from "./componentes/AuthProvider/authProvider";
+import Shopping from "./views/Shopping/Shopping";
+import ProtectedRoute from "./GeneralLogin";
 import Unauthorized from "./views/Unauthorized/Unauthorized";
 
 function App() {
@@ -40,9 +41,10 @@ function App() {
             <Route exact path="/about" component={About} />
             <Route exact path="/register" component={Registro} />
             <Route exact path="/detail/:id" component={Detail} />
-            <Route exact path="/perfil" component={Perfil} />
-            <Route exact path="/Configuracion" component={Ajustes} />
+            <Route exact path="/shopping" component={Shopping} />
             <Route exact path="/unauthorized" component={Unauthorized} />
+            <Route exact path="/configUser" component={UserDashboard} />
+            <Route exact path="/configAdmin" component={AdminDashboard} />
           </Switch>
         </div>
       </Router>

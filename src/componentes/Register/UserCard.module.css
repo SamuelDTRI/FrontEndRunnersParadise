@@ -2,7 +2,7 @@
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
-  position: relative; 
+  position: relative;
 }
 
 .userCard h3 {
@@ -19,9 +19,9 @@
   padding: 3px 6px;
   cursor: pointer;
   font-size: 10px;
-  position: absolute; 
-  bottom: 5px; 
-  right: 5px; 
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .userCard button:hover {

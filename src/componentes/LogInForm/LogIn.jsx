@@ -5,10 +5,9 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import GoogleLogin from "react-google-login";
 import { gapi } from "gapi-script";
+import { registerUser } from "../../redux/actions/actions";
 import style from "./Login.module.css";
 import { AuthContext } from "../AuthProvider/authProvider";
-import { loginSuccess } from "../../redux/actions/actions";
-
 
 export default function LogIn(props) {
   const dispatch = useDispatch();
@@ -76,13 +75,11 @@ export default function LogIn(props) {
         "https://backendrunnersparadise-production.up.railway.app/users/login",
         userData
       );
-      console.log("response se envia a bdd:", response); // Update the URL to the correct endpoint
+      console.log("response:", response); // Update the URL to the correct endpoint
       const data = response.data;
       console.log("user data:", data);
       if (data) {
-         dispatch(loginSuccess(data));
-         console.log("despachadno: ", data);
-         setAuth({ token: data });
+        setAuth({ token: data });
         history.push("/home");
         console.log(data);
       } else {
@@ -97,12 +94,20 @@ export default function LogIn(props) {
     console.log("Valor actualizado de auth:", auth);
   }, [auth]);
 
-  useEffect(() => {
-    console.log("Valor actualizado de auth:", auth);
-  }, [auth]);
-
   const onSuccess = (response) => {
     console.log("Login Success: currentUser:", response.profileObj);
+    const profile = response.profileObj;
+    if (response) {
+      dispatch(
+        registerUser({
+          name: "jaime",
+          surName: "gallego",
+          email: "jaimeGallego@gmail.com",
+          password: "Test123.",
+          admin: true,
+        })
+      );
+    }
     setAuth({ token: response.profileObj });
     history.push("/home");
   };
