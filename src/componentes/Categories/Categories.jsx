@@ -5,15 +5,12 @@ const Categories = () => {
     <div className={style.container}>
       <div className={style.containerContent}>
         <ul className={style.brandList}>
-          <li className={style.brandNike}>
+          {/* <li className={style.brandNike}>
             <img src="\src\assets\nikeblanco.png" alt="" />
-          </li>
-          <li className={style.brandNB}>
-            <img src="\src\assets\logonbwhite.png" alt="" />
           </li>
           <li className={style.brandAdidas}>
             <img src="\src\assets\logoadidaswhite.png" alt="" />
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>
