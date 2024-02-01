@@ -182,7 +182,7 @@ const BasicRating = () => {
               <div className={style.reviewInfo}>
                 <p>
                   Las opiniones son públicas y contienen la información de tu
-                  cuenta y dispositivo. <a href="">Más información</a>
+                  cuenta y dispositivo.
                 </p>
               </div>
               <br />

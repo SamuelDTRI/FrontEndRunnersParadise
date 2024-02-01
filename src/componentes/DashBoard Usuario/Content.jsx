@@ -2,6 +2,7 @@ import * as React from "react";
 import UserProfile from "../perfilDeUsuario/perfil";
 import { AuthContext } from "../AuthProvider/authProvider";
 import PaymentMethods from "./Métodos de pago/paymentMethods";
+import Compras from "../Compras/compras";
 
 export default function Content() {
   const { tab } = React.useContext(AuthContext);
@@ -28,6 +29,12 @@ export default function Content() {
         </div>
       );
       break;
+    case "Compras":
+      return (
+        <div>
+          <Compras />
+        </div>
+      );
     default:
       return (
         <div>
@@ -36,5 +43,3 @@ export default function Content() {
       );
   }
 }
-
-//comentario pa que aparezca este archivo entre los cambios para hacer pull

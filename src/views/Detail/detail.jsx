@@ -118,7 +118,7 @@ const Detail = ({ brand }) => {
             src={
               setSelectedImageIndex.length > 0
                 ? setSelectedImageIndex
-                : (zapatilla && zapatilla.image.secure_url) ||
+                : (zapatilla && zapatilla.image[0].secure_url) ||
                   zapatilla.image[0].secure_url
             }
             alt={zapatilla.name}

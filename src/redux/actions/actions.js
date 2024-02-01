@@ -700,11 +700,11 @@ export const getAllItems = (userId) => async (dispatch) => {
   }
 };
 
-export const removeFromCart = (productId) => async (dispatch) => {
+export const removeFromCart = (productId, userId) => async (dispatch) => {
   dispatch({ type: REMOVE_FROM_CART });
   try {
     await axios.delete(
-      `https://backendrunnersparadise-production.up.railway.app/cart/1/${productId}`
+      `https://backendrunnersparadise-production.up.railway.app/cart/${userId}/${productId}`
     );
     dispatch({ type: REMOVE_FROM_CART, payload: { productId } });
   } catch (error) {

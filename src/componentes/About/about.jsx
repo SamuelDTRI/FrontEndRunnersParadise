@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./About.css"; // Asegúrate de tener este archivo CSS para los estilos personalizados
+import "./about.css"; // Asegúrate de tener este archivo CSS para los estilos personalizados
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export default function About(props) {
@@ -85,11 +85,10 @@ export default function About(props) {
           <h5>Equipo</h5>
         </div>
         <div className="agradecimientosContent">
-          <h6>Front</h6>
+          <h6>¡Equipo de RunnersParadise!</h6>
           <p>
             Andres Vera
             <br />
-            Abril
             <br />
             Matias Quirico
             <br />
@@ -108,21 +107,21 @@ export default function About(props) {
 
           <div className="socialIcons">
             <a
-              href="https://www.instagram.com/tu_usuario_instagram"
+              href="https://www.facebook.com/soyhenryok/"
               target="_blank"
               rel="noopener noreferrer"
             >
               <i className="fab fa-instagram"></i>
             </a>
             <a
-              href="https://www.facebook.com/tu_usuario_facebook"
+              href="https://www.facebook.com/soyhenryok/"
               target="_blank"
               rel="noopener noreferrer"
             >
               <i className="fab fa-facebook"></i>
             </a>
             <a
-              href="https://github.com/tu_usuario_github"
+              href="https://github.com/AndresXX1/P.F-Front"
               target="_blank"
               rel="noopener noreferrer"
             >

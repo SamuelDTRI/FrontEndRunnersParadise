@@ -23,7 +23,7 @@ const Shopping = () => {
   }, [dispatch]);
 
   const handleRemoveFromCart = (productId) => {
-    dispatch(removeFromCart(productId));
+    dispatch(removeFromCart(productId, auth.token.id));
   };
 
   const visibleItems = items.filter((item) => !item.deleted);
@@ -47,7 +47,7 @@ const Shopping = () => {
       const response = await axios.post(
         `https://backendrunnersparadise-production.up.railway.app/payment/createOrder/${auth.token.id}`,
         {
-          title: "pago eccomerce",
+          title: "Pago Eccomerce",
           quantity: 1,
           price: total,
         }
@@ -80,14 +80,13 @@ const Shopping = () => {
         <div className={style.tableRow}>
           {visibleItems.map((item) => (
             <div key={item.id} className={style.shoppingCard}>
-              <img
-                src={
-                  item.Product.image[0].secure_url ||
-                  item.Product.image[0].secure_url
-                }
-                alt={item.Product.name}
-                className={style.cardImage}
-              />
+              {item.Product && item.Product.image && item.Product.image[0] && (
+                <img
+                  src={item.Product.image[0].secure_url}
+                  alt={item.Product.name}
+                  className={style.cardImage}
+                />
+              )}
               <div className={style.cardContent}>
                 <div className={style.cardTitle}>{item.name}</div>
                 <div className={style.cardPrice}>
@@ -140,20 +139,20 @@ const Shopping = () => {
       </div>
       <div className={style.paymantContainer}>
         <div className={style.Summary}>
-          <span>Summary</span>
+          <span>Resumen</span>
         </div>
 
         <div className={style.lineDivider}></div>
 
         <div className={style.shipping}>
-          <h4>Estimated shipping and handling costs </h4>
-          <span className={style.gratuitous}>Gratuitous</span>
+          <h4>Costos estimados de envío y manipulación</h4>
+          <span className={style.gratuitous}>Gratuito</span>
         </div>
 
         <div className={style.lineDivider}></div>
 
         <div className={style.total}>
-          <span>total</span>
+          <span>Total</span>
           <h4> ${total} </h4>
         </div>
         <div className={style.buyButtonContainer}>
