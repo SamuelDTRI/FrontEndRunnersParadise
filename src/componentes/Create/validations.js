@@ -29,4 +29,5 @@ const validation = (input, existingNames) => {
 
   return errors;
 };
+
 export default validation;

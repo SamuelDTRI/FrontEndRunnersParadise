@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-
 import { useEffect } from "react";
 import { getSneakers, searchBar } from "../../redux/actions/actions";
-
 import Cards from "../../componentes/Cards/cards";
 import Paginado from "../../componentes/Paginado/paginado";
 import styles from "./Home.module.css";
 import Filter from "../../componentes/Filter/filter";
 import SearchBar from "../../componentes/SearchBar/searchBar";
 import Alert from "../../componentes/Alert/Alert";
+import HomeSlide from "./HomeSlide";
+import Categories from "../../componentes/Categories/Categories";
+import { style } from "@mui/system";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -65,24 +66,18 @@ const Home = () => {
       <FontAwesomeIcon icon={faTimesCircle} style={{ marginLeft: "10px" }} />
     </div>
   );
+  
   return (
-    <div>
-      <div className={styles.container}>
-        <div className={styles.filterComponent}>
-          <div className={styles.searchBarComponent}>
-            <SearchBar
-              totalSneaker={totalSneaker}
-              page={currentPage}
-              pageSize={pageSize}
-              setCurrentPage={setCurrentPage}
-            ></SearchBar>
-          </div>
-          <Filter
-            totalSneaker={searchState ? searchState.length : totalSneaker}
-            page={currentPageSearch >= 1 ? currentPageSearch : currentPage}
-            pageSize={pageSize}
-            setCurrentPage={setCurrentPage}
-          ></Filter>
+    <div className={styles.container}>
+      <div>
+        <div className={styles.bannerContent}>
+          <HomeSlide />
+        </div>
+        <div>
+          <Categories />
+        </div>
+        <div id="catalogue" className={styles.catalogueTitle}>
+          <h2>TRENDING ITEMS</h2>
         </div>
         <div className={styles.paginado}>
           <Paginado
@@ -91,6 +86,23 @@ const Home = () => {
             pageSize={pageSize}
             setCurrentPage={setCurrentPage}
           />
+        </div>
+        <br />
+        <div className={styles.searchBarComponent}>
+          <SearchBar
+            totalSneaker={totalSneaker}
+            page={currentPage}
+            pageSize={pageSize}
+            setCurrentPage={setCurrentPage}
+          ></SearchBar>
+        </div>
+        <div className={styles.filterComponent}>
+          <Filter
+            totalSneaker={searchState ? searchState.length : totalSneaker}
+            page={currentPageSearch >= 1 ? currentPageSearch : currentPage}
+            pageSize={pageSize}
+            setCurrentPage={setCurrentPage}
+          ></Filter>
         </div>
         <div className={styles.cardsComponent}>
           <Cards sneakers={sneakers} />

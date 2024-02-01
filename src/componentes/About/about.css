@@ -1,7 +1,8 @@
+/* Estilos para el contenedor principal */
 .fondo {
-  background-image: url("https://static.vecteezy.com/system/resources/previews/005/930/467/non_2x/running-shoes-sneakers-for-running-and-doing-sports-on-track-treadmill-background-in-home-free-photo.JPG");
+  background-image: url("https://cdn.mos.cms.futurecdn.net/v44n2mBJgaRoCkkFGjDtRP.jpeg");
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-attachment: fixed;
   margin: 0;
   padding: 0;
@@ -10,52 +11,50 @@
   justify-content: center;
 }
 
+/* Estilos para contenedor general */
 .container {
   top: 200px;
 }
 
+/* Estilos para la sección "about" */
 .about {
   color: #333;
   border-radius: 10px;
   z-index: 1;
 }
 
-.title {
-  border-bottom: 2px solid #3498db;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-}
-
+/* Estilos para los títulos */
 .title h3 {
   font-size: 16px;
   font-weight: 700;
   text-align: center;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .title1 h5 {
+  font-weight: 700;
   border-bottom: 2px solid #3498db;
   padding-bottom: 10px;
-  font-weight: 700;
   margin-bottom: 20px;
   margin-top: 10px;
 }
 
+/* Estilos para los textos */
 .text {
   line-height: 1.6;
   margin-bottom: 20px;
 }
 
-.cuadrante {
+/* Estilos para los cuadrantes y agradecimientos */
+.cuadrante,
+.agradecimientos {
   background-color: rgba(208, 209, 238, 0.796);
-  width: calc(60% - 20px);
-  padding: 14px;
-  padding-top: 20px;
-  height: 500px;
   border: 1px solid rgba(178, 174, 174, 0.984);
   border-radius: 5px;
-  margin-right: 30px;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5);
-  margin-top: -200px;
+  height: 500px;
   transition: transform 0.3s;
 }
 
@@ -64,73 +63,31 @@
 }
 
 .agradecimientos {
-  border: 1px solid rgba(178, 174, 174, 0.984);
-  background-color: rgba(208, 209, 238, 0.796);
   text-align: start;
-  border-radius: 5px;
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5);
   height: 420px;
   width: 900px;
   position: relative;
-  top: -140px;
-  transition: transform 0.3s;
+  top: -40px;
 }
 
-.agradecimientos h5 {
-  text-align: center;
-}
-
-.agradecimientosContent p {
-  text-align: center;
-}
-
-.agradecimientosContent h6 {
-  margin-left: 10px;
-}
-
+/* Estilos para la interacción */
 .cuadrante:hover,
 .agradecimientos:hover {
   transform: scale(1.03);
 }
 
-.top-section,
-.bottom-section {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-/* Ajustes para dispositivos más pequeños */
+/* Estilos para secciones en dispositivos más pequeños */
 @media (max-width: 768px) {
-  .cuadrante {
-    width: 100%;
-    margin-right: 0; /* Elimina el espacio entre cuadrantes en dispositivos más pequeños */
-    margin-bottom: 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .agradecimientos {
-    width: 100%;
-    margin-right: 0; /* Elimina el espacio entre cuadrantes en dispositivos más pequeños */
-    margin-bottom: 20px;
-  }
-}
-
-@media (max-width: 768px) {
+  .cuadrante,
+  .agradecimientos,
   .about {
     width: 100%;
-    margin-right: 0; /* Elimina el espacio entre cuadrantes en dispositivos más pequeños */
+    margin-right: 0;
     margin-bottom: 20px;
   }
 }
 
-.back {
-  margin-top: 20px;
-  margin-bottom: -10px;
-}
-
+/* Estilos para los íconos de redes sociales */
 .fa {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
@@ -140,7 +97,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Estilos específicos para los iconos de marca de Font Awesome */
 .fab {
   font-weight: 400;
   margin-left: 20px;
@@ -163,6 +119,7 @@
   content: "\f09b"; /* Código Unicode para el ícono de GitHub */
 }
 
+/* Estilos para los textos de los íconos de redes sociales */
 .socialIcons h6 {
   font-size: 14px;
   position: relative;
@@ -176,6 +133,11 @@
   position: relative;
   top: -20px;
 }
+
+.back {
+  margin-top: 20px;
+}
+
 .back1 {
   margin-top: 20px;
 }

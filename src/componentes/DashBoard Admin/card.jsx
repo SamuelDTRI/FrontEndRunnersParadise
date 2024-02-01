@@ -24,10 +24,10 @@ export default function ImgMediaCard(props) {
   const { editedProduct, setEditedProduct } = React.useContext(AuthContext);
   const dispatch = useDispatch();
 
-  const deleteElement = async (idKey) => {
+  const deleteElement = async (id) => {
     try {
       const response = await axios.delete(
-        `https://backendrunnersparadise-production.up.railway.app/products/delete/${idKey}`
+        `http://localhost:3000/products/delete/${id}`
       );
       if (response.status === 200) {
         console.log("Elemento eliminado correctamente");
@@ -37,8 +37,9 @@ export default function ImgMediaCard(props) {
     } catch (error) {
       console.error("Error al eliminar el elemento:", error);
     }
-    dispatch(getSneakers(), [dispatch]);
+    dispatch(getSneakers()); 
   };
+  
 
   const handleEdit = (product) => {
     setEditedProduct(product);

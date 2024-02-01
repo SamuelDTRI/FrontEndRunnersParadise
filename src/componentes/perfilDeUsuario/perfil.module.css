@@ -11,7 +11,7 @@
 .container {
   align-items: center;
   justify-content: center;
-  height: 700px;
+  height: 800px;
   margin-top: -50px;
   margin-left: 350px;
 }
@@ -26,7 +26,7 @@
   display: flex;
   margin-top: -10px;
   border: 1px solid black;
-  height: 100px;
+  height: 200px;
   width: 100px;
   border-radius: 9px;
   background-color: #ffffff8e;
@@ -73,9 +73,10 @@
   position: absolute;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
   width: 250px;
-  height: 353px;
+  height: 460px;
   margin-left: 10px;
-  overflow: auto; /* Agregar scroll si el contenido es más grande */
+  overflow: auto;
+  font-size: 20px;
 }
 
 .textopreview {
@@ -83,6 +84,7 @@
   font-size: 50px;
   margin-bottom: 0px;
   margin-top: -30px;
+  font-size: 15px;
 }
 
 .titulo {
@@ -104,7 +106,7 @@
 
 .textoPrev p {
   color: #34495e;
-  font-size: 12px;
+  font-size: 15px;
   text-align: left;
   margin-top: 25px;
 }
@@ -123,7 +125,7 @@
   margin-bottom: 5px;
   position: absolute;
   margin-left: 12px;
-  margin-top: 200px;
+  margin-top: 250px;
 }
 .tabContent {
   display: flex;
@@ -144,7 +146,7 @@
   margin-left: -23px;
   border: 1px solid #fdfffee6;
   width: 255px;
-  height: 395px;
+  height: 500px;
   margin-top: 50px;
   position: absolute;
   background-color: #ffffffcb;

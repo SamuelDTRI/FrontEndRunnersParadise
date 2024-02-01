@@ -1,7 +1,13 @@
-.fondo2 {
-  background-position: center;
+.body {
+  background-image: url("https://estaticos-cdn.prensaiberica.es/clip/9181e8b7-d470-4269-8250-8ba0e6283d17_16-9-discover-aspect-ratio_default_0.jpg");
   background-size: cover;
-  background-image: url("https://i.blogs.es/a83cac/maxfly/1366_2000.jpeg");
+  background-position: center center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
@@ -11,129 +17,124 @@
   right: 140px;
 }
 
-.form-and-preview-container {
+.formandpreviewcontainer {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 20px;
 }
 
-.form-container,
-.preview-container {
-  background-color: rgba(142, 160, 184, 0.8);
-  width: 340px;
+.formcontainer,
+.previewcontainer {
+  background-color: rgba(200, 204, 207, 0.856);
+  width: 600px;
   margin-left: 80px;
   left: -40px;
-  top: -140px;
+  top: 50px;
   position: relative;
   padding: 14px;
-  height: 640px;
+  height: 500px;
   border-radius: 5px;
   outline: 1px solid rgba(21, 21, 22, 0.8);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   overflow-x: auto;
+  margin-bottom: 200px;
 }
 
-.form-container::-webkit-scrollbar {
+.formcontainer::-webkit-scrollbar {
   width: 0px;
 }
 
-.preview-container {
+.previewcontainer {
   border-left: 10px;
 }
 
-.form-label {
+.formlabel {
   font-weight: bold;
   color: rgb(255, 255, 255);
   border-radius: 10px;
   height: 20px;
   font-size: 14px;
+  margin-bottom: 10px;
 }
 
-.form-input {
+.forminput {
   width: 100%;
   border: none;
   border-bottom: 1px solid rgb(21, 19, 19);
   background-color: transparent !important;
   color: rgb(16, 15, 15);
   transition: border-color 0.3s, color 0.3s;
+  margin-bottom: 20px;
+  padding: 10px;
 }
 
-.error-message {
+.errormessage {
   color: rgb(245, 24, 24);
   font-size: 10px;
   position: relative;
-  top: 4px;
+  top: -4px;
   left: 6px;
 }
 
-.checkbox-container {
+.checkboxcontainer {
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
 }
 
-.submit-button {
+.submitbutton {
   font-size: 14px;
   background-color: dodgerblue;
   color: white;
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  width: 80px;
+  width: 100%;
   display: flex;
   justify-content: center;
   position: relative;
-  top: -10px;
+  top: 10px;
   height: 42px;
   transition: background-color 0.3s;
 }
 
-.submit-button:hover {
+.submitbutton:hover {
   background-color: #007acc;
 }
 
-.image-preview {
+.imagepreview {
   width: auto;
   height: 200px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(123, 118, 136, 0.8);
   border-radius: 10px;
-  color: rgb(21, 18, 18);
+  color: rgb(215, 19, 19);
   display: flex;
   align-items: center;
   justify-self: center;
   object-fit: cover;
+  margin-bottom: 20px;
 }
 
-.preview-image {
+.previewimage {
   width: 100%;
-  height: 220px;
-  justify-content: center;
-  margin: 0 auto;
-  justify-self: center;
+  height: 100%;
   object-fit: cover;
   border-radius: 5px;
-}
-
-.preview-image img {
-  justify-self: center;
-  object-fit: cover;
 }
 
 .tipos {
   border: 1px solid rgba(23, 20, 20, 0.501);
   text-align: center;
   border-radius: 10px;
-  max-width: 400px;
-  max-height: 210px;
+  max-width: 610px;
+  max-height: 250px;
   margin-top: 20px;
   top: 44px;
   position: relative;
   margin-bottom: 30px;
   color: rgb(7, 6, 6);
-  margin-left: -2px;
-  margin-right: -2px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -151,15 +152,15 @@
 }
 
 .nombre {
-  min-width: 300px; /* Ancho mínimo deseado */
-  width: 100%; /* Permite crecer automáticamente */
+  min-width: 300px;
+  width: 100%;
   height: 40px;
   text-align: start;
   top: 10px;
   left: 10px;
   border-radius: 5px;
   overflow: hidden;
-  position: relative; /* Esto puede no ser necesario, comprueba si deseas centrarlo */
+  position: relative;
   color: rgb(15, 14, 14);
   margin-top: -10px;
   margin-bottom: 10px;
@@ -173,46 +174,48 @@
   margin-right: 0px;
 }
 
-.selected-sizes-container {
+.selectedsizescontainer {
   display: flex;
   justify-content: center;
 }
 
-.selected-size {
+.selectedsize {
   padding: 2px;
   margin-right: 2px;
   margin-bottom: 8px;
   margin-top: -8px;
 }
 
-.size-separator {
+.sizeseparator {
   width: 5px;
 }
 
-.button-container {
+.buttoncontainer {
   display: flex;
   justify-content: center;
-  position: relative;
+  position: absolute;
   top: 30px;
+  margin-top: 400px;
+  margin-left: 350px;
 }
 
-.precio-preview {
+.preciopreview {
   color: green;
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   text-align: start;
   top: 10px;
   left: 10px;
   font-size: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   position: relative;
 }
 
-.form-input::placeholder {
+.forminput::placeholder {
   color: #f3e9e9;
 }
 
 .colormarca [disabled] {
-  color: #999; /* Puedes cambiar este color según tu preferencia */
+  color: #999;
 }
 
 .cuadrante,
@@ -224,7 +227,6 @@
   box-sizing: border-box;
 }
 
-/* Consultas de medios para ajustar el diseño en dispositivos más pequeños */
 @media (max-width: 768px) {
   .cuadrante,
   .agradecimientos,
@@ -234,19 +236,19 @@
   }
 }
 
-.successMessage {
+.successmessage {
   position: relative;
   top: -40px;
 }
 
-.image-container {
+.imagecontainer {
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.nav-button {
+.navbutton {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -258,11 +260,11 @@
   transition: all 0.3s ease;
 }
 
-.nav-button:hover {
+.navbutton:hover {
   opacity: 1;
 }
 
-.nav-button:active {
+.navbutton:active {
   transform: scale(1.2);
 }
 
@@ -274,7 +276,53 @@
   right: 0;
 }
 
-.preview-image {
+.previewimage {
   max-width: 100%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.inputModelo {
+  position: absolute;
+  width: 200px;
+  margin-left: 80px;
+}
+
+.formlabelModelo {
+  margin-top: 7px;
+  color: white;
+}
+
+.inputprecio {
+  position: absolute;
+  width: 5px;
+  margin-left: 350px;
+}
+
+.formlabelprecio {
+  color: rgb(37, 179, 37);
+  position: absolute;
+  margin-left: 295px;
+  margin-top: 10px;
+}
+
+.forminputprecio {
+  background-color: rgba(189, 193, 197, 0.973);
+  border-color: rgba(213, 217, 221, 0.973);
+}
+
+.formlabelimagen {
+  margin-top: 40px;
+  position: relative;
+  color: #f3e9e9;
+}
+
+.inputimage {
+  position: relative;
+  margin-top: -45px;
+  margin-left: 70px;
+}
+
+.formlabelDescripcion {
+  position: relative;
+  margin-top: -5px;
 }

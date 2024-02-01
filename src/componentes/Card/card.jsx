@@ -26,16 +26,13 @@ const Card = ({ id, model, size, image, color, brand, price }) => {
     <div className={style.container}>
       <div className={style.cardContent}>
         <div className={style.cardTitle}>
-          <h3 style={{ fontWeight: "500" }}>{brand}</h3>
+          <h3 style={{ fontWeight: "600" }}>{brand}</h3>
         </div>
         <img src={image} alt="Zapatilla" />
-        <div className={style.brand}>
-          <h3>{model}</h3>
-          <div className={style.details}>
+        <div className={style.details}>
+          <div className={style.brand}>
+            <h3>{model}</h3>
             <h4>${price} USD</h4>
-          </div>
-          <div className={style.logoContainer}>
-            {logoUrl && <img src={logoUrl} alt={`${brand} Logo`} />}
           </div>
         </div>
       </div>

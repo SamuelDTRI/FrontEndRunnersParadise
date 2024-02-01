@@ -1,6 +1,7 @@
-import { AuthContext } from "../AuthProvider/authProvider";
-import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../componentes/AuthProvider/authProvider";
+import axios from "axios";
+import style from "./compras.module.css";
 
 const Compras = () => {
   const { auth, setAuth } = useContext(AuthContext);
@@ -11,7 +12,6 @@ const Compras = () => {
     const fetchData = async () => {
       try {
         const token = auth.token.id;
-        console.log("este es el id", token);
         const response = await axios.get(
           `https://backendrunnersparadise-production.up.railway.app/payment/getDataPayment/${token}`
         );
@@ -46,10 +46,12 @@ const Compras = () => {
   }
 
   return (
-    <div>
+    <div className={style.container}>
+      <h3 className={style.heading}>Historial de compras</h3>
+
       {items.length > 0 ? (
         items.map((item, index) => (
-          <div key={index}>
+          <div key={index} className={style.item}>
             <p>Fecha: {item.date}</p>
             <p>Estado: {item.status}</p>
             <p>Título: {item.title}</p>

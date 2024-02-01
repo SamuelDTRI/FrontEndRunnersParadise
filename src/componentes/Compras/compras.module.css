@@ -1,0 +1,18 @@
+/* compras.module.css */
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.item {
+  margin-bottom: 20px;
+}
+
+/* Agrega más estilos según sea necesario */

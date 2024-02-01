@@ -19,7 +19,7 @@ const SearchBar = () => {
   const size = useSelector((state) => state?.sizeValue);
   const price = useSelector((state) => state?.orderPrice);
   const searchState = useSelector((state) => state?.dataSearch);
-  const pageSize = 6;
+  const pageSize = 3;
   const fetchData = async (term) => {
     try {
       const sneakers = term
@@ -75,7 +75,7 @@ const SearchBar = () => {
           onClick={handleReset}
         />
       </form>
-    </div>
+     </div>
   );
 };
 

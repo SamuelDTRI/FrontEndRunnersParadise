@@ -8,29 +8,27 @@ const Cards = ({ sneakers, message }) => {
     return <p>{message}</p>;
   }
 
-  return (
+  return (  
     <div className={style.container}>
-      <div className={style.cardContent}>
-        {sneakers.map(({ id, image, name, colors, brand, size, price }) => (
-          <div key={id} className={style.linkContainer}>
-            <Link to={`/detail/${id}`} style={{ textDecoration: "none" }}>
-              <Card
-                id={id}
-                image={
-                  image && image.length > 0
-                    ? image[0].secure_url
-                    : image.secure_url
-                }
-                model={name}
-                color={colors[0] || "DefaultColor"}
-                brand={brand}
-                size={size[0] || "DefaultSize"}
-                price={price}
-              />
-            </Link>
-          </div>
-        ))}
-      </div>
+      {sneakers.map(({ id, image, name, colors, brand, size, price }) => (
+        <div key={id} className={style.linkContainer}>
+          <Link to={`/detail/${id}`} style={{ textDecoration: "none" }}>
+            <Card
+              id={id}
+              image={
+                image && image.length > 0
+                  ? image[0].secure_url
+                  : image.secure_url
+              }
+              model={name}
+              color={colors[0] || "DefaultColor"}
+              brand={brand}
+              size={size[0] || "DefaultSize"}
+              price={price}
+            />
+          </Link>
+        </div>
+      ))}
     </div>
   );
 };

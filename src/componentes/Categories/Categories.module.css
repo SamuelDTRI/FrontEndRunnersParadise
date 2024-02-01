@@ -1,0 +1,58 @@
+.container {
+  margin-top: 0px;
+}
+
+.brandList {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0px;
+  position: relative;
+  top: 40px;
+  display: flex;
+  background-color: black;
+}
+
+.brandList li {
+  position: relative;
+  display: flex;
+  left: -184px;
+  top: 6px;
+  margin-left: 40px;
+}
+
+.brandList li h3 {
+  display: flex;
+  position: relative;
+  top: 76px;
+  justify-content: center;
+}
+
+.brandNike img {
+  position: relative;
+  left: 164px;
+  top: -10px;
+  width: 180px;
+}
+
+.brandNB img {
+  position: relative;
+  left: 164px;
+  top: 38px;
+  width: 160px;
+  height: 90px;
+}
+
+.brandAdidas img {
+  position: relative;
+  left: 164px;
+  top: -10px;
+  width: 180px;
+}
+
+.brandTitle {
+  display: flex;
+  justify-content: center;
+}

@@ -97,7 +97,7 @@ const Shopping = () => {
                       : item.quantity)}{" "}
                   USD
                 </div>
-                <div>
+                <div className={style.unidad}>
                   {item.quantity > 1 ? `valor unidad : ${item.price}` : null}
                 </div>
                 <div className={style.cardColors}>

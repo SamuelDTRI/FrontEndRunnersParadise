@@ -1,5 +1,5 @@
+
 .container label {
-  font-family: 'Times New Roman', serif; 
   font-size: 28px;
   font-weight: 600;
 }
@@ -44,6 +44,7 @@
   top: 10px;
   color: red;
 }
+
 .container span {
   position: relative;
   top: -2px;
@@ -55,6 +56,7 @@
   width: 100%;
   display: flex;
   height: 100%;
+  border-radius: 10px;
 }
 
 .container::-webkit-scrollbar {
@@ -82,15 +84,6 @@
   top: -16px;
   left: 30px;
   background-color: black;
-  border: 2px solid black; /* Añadido borde */
-  cursor: pointer; /* Cambio de cursor al pasar sobre el botón */
-  transition: background-color 0.3s, color 0.3s, border 0.3s; /* Efecto de transición para cambios suaves */
-}
-
-.container button:hover {
-  background-color: rgb(100, 100, 100);
-  color: black;
-  border: 2px solid rgb(0, 0, 0); /* Cambio de color y borde al pasar el mouse */
 }
 
 .container button h5 {
@@ -152,6 +145,9 @@ textarea {
   top: 40px;
 }
 
+.reviewContainer {
+  border-color: black;
+}
 .userDataReview {
   position: relative;
   top: -10px;

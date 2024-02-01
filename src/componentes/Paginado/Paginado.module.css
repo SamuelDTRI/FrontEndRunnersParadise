@@ -1,11 +1,3 @@
-.container {
-  z-index: 300;
-  height: 40px;
-  position: absolute;
-  top: 58px;
-  right: 50px;
-}
-
 .container span {
   font-weight: 700;
   font-size: 12px;

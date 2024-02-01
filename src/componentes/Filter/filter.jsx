@@ -7,11 +7,9 @@ import {
   sizeValue,
   orderPrice,
 } from "../../redux/actions/actions";
-import Select from "../Select/select.jsx";
 import style from "./Filter.module.css";
 
 function Filter({ page, pageSize }) {
-  console.log("Page in Filter:", page);
   const brand = useSelector((state) => state?.brandValue);
   const color = useSelector((state) => state?.colorValue);
   const size = useSelector((state) => state?.sizeValue);
@@ -21,84 +19,107 @@ function Filter({ page, pageSize }) {
   const dispatch = useDispatch();
 
   const handleFilterBrand = (value) => {
-    dispatch(getSneakers((page = 1), pageSize, value, color, size, price));
-    dispatch(brandValue(value));
+    const updatedBrand = brand.includes(value)
+      ? brand.filter((item) => item !== value)
+      : [...brand, value];
+    dispatch(getSneakers(page, pageSize, updatedBrand, color, size, price));
+    dispatch(brandValue(updatedBrand));
   };
 
   const handleFilterColor = (value) => {
-    dispatch(getSneakers((page = 1), pageSize, brand, value, size, price));
-    dispatch(colorValue(value));
+    const updatedColor = color.includes(value)
+      ? color.filter((item) => item !== value)
+      : [...color, value];
+    dispatch(getSneakers(page, pageSize, brand, updatedColor, size, price));
+    dispatch(colorValue(updatedColor));
   };
 
   const handleFilterSize = (value) => {
-    dispatch(getSneakers((page = 1), pageSize, brand, color, value, price));
-    dispatch(sizeValue(value));
+    const updatedSize = size.includes(value)
+      ? size.filter((item) => item !== value)
+      : [...size, value];
+    dispatch(getSneakers(page, pageSize, brand, color, updatedSize, price));
+    dispatch(sizeValue(updatedSize));
   };
 
   const handleOrderPrice = (value) => {
     if (searchData.length > 0) {
-      dispatch(searchBar(searchData, (page = 1), pageSize, value));
-      dispatch(orderPrice(value));
+      dispatch(searchBar(searchData, page, pageSize, value));
     } else {
-      dispatch(getSneakers((page = 1), pageSize, brand, color, size, value));
-      dispatch(orderPrice(value));
+      dispatch(getSneakers(page, pageSize, brand, color, size, value));
     }
+    dispatch(orderPrice(value));
   };
 
   return (
-    <div className={style.containerContent}>
-      <div className={style.container}>
-        <div className={style.titleContainer}>
-          <h3>FILTER</h3>
+    <div className={style.container}>
+      <div className={style.containerContent}>
+        <div className={style.filterContainer}>
+          <div className={style.filterContent}>
+            <h4>Brand</h4>
+            {["ADIDAS", "NIKE", "NEWBALANCE"].map((brandOption) => (
+              <div key={brandOption}>
+                <input
+                  type="checkbox"
+                  value={brandOption}
+                  checked={brand.includes(brandOption)}
+                  onChange={() => handleFilterBrand(brandOption)}
+                />
+                <label>{brandOption}</label>
+              </div>
+            ))}
+          </div>
+          <br />
+          <div className={style.filterContent}>
+            <h4>Color</h4>
+            {["black", "red", "blue", "pink", "white", "yellow", "green"].map(
+              (colorOption) => (
+                <div key={colorOption}>
+                  <input
+                    type="checkbox"
+                    value={colorOption}
+                    checked={color.includes(colorOption)}
+                    onChange={() => handleFilterColor(colorOption)}
+                  />
+                  <label>{colorOption}</label>
+                </div>
+              )
+            )}
+          </div>
+          <br />
+          <div className={style.filterContent}>
+            <h4>Size</h4>
+            {["7", "8", "9", "10", "11", "12"].map((sizeOption) => (
+              <div key={sizeOption}>
+                <input
+                  type="checkbox"
+                  value={sizeOption}
+                  checked={size.includes(sizeOption)}
+                  onChange={() => handleFilterSize(sizeOption)}
+                />
+                <label>{sizeOption}</label>
+              </div>
+            ))}
+          </div>
+          <br />
+          <div className={style.filterContent}>
+            <h4>Price</h4>
+            {["min", "max"].map((priceOption) => (
+              <div key={priceOption}>
+                <input
+                  type="checkbox"
+                  value={priceOption}
+                  checked={price === priceOption}
+                  onChange={() => handleOrderPrice(priceOption)}
+                />
+                <label>{priceOption}</label>
+              </div>
+            ))}
+          </div>
         </div>
-        <Select
-          name="FilterBrand"
-          options={[
-            { value: "", label: "all brands" },
-            { value: "ADIDAS", label: "ADIDAS" },
-            { value: "NIKE", label: "NIKE" },
-            { value: "NEWBALANCE", label: "NEWBALANCE" },
-          ]}
-          onChange={(e) => handleFilterBrand(e.target.value)}
-        />
-        <Select
-          name="FilterColor"
-          options={[
-            { value: "", label: "all colors" },
-            { value: "black", label: "black" },
-            { value: "red", label: "red" },
-            { value: "blue", label: "blue" },
-            { value: "pink", label: "pink" },
-            { value: "white", label: "white" },
-            { value: "yellow", label: "yellow" },
-            { value: "green", label: "green" },
-          ]}
-          onChange={(e) => handleFilterColor(e.target.value)}
-        />
-        <Select
-          name="FilterSize"
-          options={[
-            { value: "", label: "all Size" },
-            { value: "7", label: "7" },
-            { value: "8", label: "8" },
-            { value: "9", label: "9" },
-            { value: "10", label: "10" },
-            { value: "11", label: "11" },
-            { value: "12", label: "12" },
-          ]}
-          onChange={(e) => handleFilterSize(e.target.value)}
-        />
-        <Select
-          name="orderPrice"
-          options={[
-            { value: "", label: "all price" },
-            { value: "min", label: "min" },
-            { value: "max", label: "max" },
-          ]}
-          onChange={(e) => handleOrderPrice(e.target.value)}
-        />
       </div>
     </div>
   );
 }
+
 export default Filter;

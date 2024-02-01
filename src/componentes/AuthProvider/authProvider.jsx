@@ -10,8 +10,7 @@ export const AuthProvider = ({ children }) => {
 
   const [tab, setTab] = useState("");
   const [admTab, setAdmTab] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [editedProduct, setEditedProduct] = useState(null);
+  const [userTab, setUserTab] = useState("");
 
   useEffect(() => {
     localStorage.setItem("auth", JSON.stringify(auth));
@@ -26,10 +25,8 @@ export const AuthProvider = ({ children }) => {
         setTab,
         admTab,
         setAdmTab,
-        isOpen,
-        setIsOpen,
-        editedProduct,
-        setEditedProduct,
+        userTab,
+        setUserTab,
       }}
     >
       {children}

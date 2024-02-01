@@ -7,6 +7,8 @@ import {
   getSneakers,
   setSelectedImageIndex,
 } from "../../redux/actions/actions";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import style from "./Detail.module.css";
 import BottomBar from "./bottomBar";
 import Reviews from "../../componentes/Reviews/Reviews";
@@ -19,7 +21,11 @@ const Detail = ({ brand }) => {
   const { auth, setAuth } = useContext(AuthContext);
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
+  const [hoveredColor, setHoveredColor] = useState("");
+  const [hoveredSize, setHoveredSize] = useState("");
+  const [messages, setMessages] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [showMore, setShowMore] = useState(false);
   const zapatilla = useSelector((state) => state?.product?.detail);
   const currentPage = useSelector((state) => state?.product?.currentPage);
   const setSelectedImageIndex = useSelector(
@@ -28,16 +34,16 @@ const Detail = ({ brand }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const intervalRef = useRef(null);
 
-  const handleColorChange = (event) => {
-    setSelectedColor(event.target.value);
+  const handleColorChange = (selectedColor) => {
+    setSelectedColor(selectedColor);
   };
 
   console.log(selectedColor);
   console.log(selectedSize);
   console.log(id);
 
-  const handleSizeChange = (event) => {
-    setSelectedSize(event.target.value);
+  const handleSizeChange = (selectedSize) => {
+    setSelectedSize(selectedSize);
   };
   console.log(setSelectedImageIndex);
 
@@ -107,75 +113,180 @@ const Detail = ({ brand }) => {
     setCommentFormVisible(!isCommentFormVisible);
   };
 
+  const toggleShowMore = () => {
+    setShowMore(!showMore);
+  };
+
   return (
     <div className={style.container}>
-      <div className={style.sneakersListContainer}>
-        <BottomBar zapatilla={zapatilla} />
-      </div>
-      <div className={style.detailContainer}>
-        <div className={style.imagePreview}>
-          <img
-            src={
-              setSelectedImageIndex.length > 0
-                ? setSelectedImageIndex
-                : (zapatilla && zapatilla.image[0].secure_url) ||
-                  zapatilla.image[0].secure_url
-            }
-            alt={zapatilla.name}
-          />
-        </div>
-        <div className={style.detailContent}>
-          <h2>{zapatilla && zapatilla.brand}</h2>
-          <div className={style.nameContainer}>
-            <h4>{zapatilla && zapatilla.name}</h4>
-          </div>
-          {logoUrl && (
-            <div className={style.logoContainer}>
-              <img src={logoUrl} alt={`${zapatilla.brand} Logo`} />
+      <div className={style.lineDividerHeader}></div>
+      <section>
+        <div className={style.flexBox}>
+          <div className={style.left}>
+            <div className={style.bigImg}>
+              <img
+                src={
+                  setSelectedImageIndex.length > 0
+                    ? setSelectedImageIndex
+                    : (zapatilla && zapatilla.image.secure_url) ||
+                      zapatilla.image[0].secure_url
+                }
+                alt={zapatilla.name}
+              />
             </div>
-          )}
-          <div className={style.price}>
-            <h4>${zapatilla.price * quantity} USD</h4>
-          </div>
-          <div className={style.containerColors}>
-            <label>Colors:</label>
-            <select onChange={handleColorChange}>
-              <option value="">Select</option>
-              {zapatilla.colors.map((color, index) => (
-                <option key={index} value={color}>
-                  {color}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className={style.sizesContainer}>
-            <div className={style.sizes}>
-              <label>Sizes:</label>
-            </div>
-            <select onChange={handleSizeChange}>
-              <option value="">Select</option>
-              {zapatilla.size.map((size, index) => (
-                <option key={index} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className={style.quantityContainer}>
-            <h4>Selecciona la cantidad:</h4>
-            <div className={style.quantityButtons}>
-              <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>
-                -
-              </button>
-              <span>{quantity}</span>
-              <button onClick={() => setQuantity(quantity + 1)}>+</button>
+            <div className={style.images}>
+              <div className={style.smallImg}>
+                <BottomBar zapatilla={zapatilla} />
+              </div>
             </div>
           </div>
+          <div className={style.right}>
+            <div className={style.nameContainer}>
+              <h1>{zapatilla && zapatilla.name}</h1>
+            </div>
+            <div className={style.brand}>
+              <h4> Sneakers - {zapatilla && zapatilla.brand}</h4>
+            </div>
+            {logoUrl && (
+              <div className={style.logoContainer}>
+                <img src={logoUrl} alt={`${zapatilla.brand} Logo`} />
+              </div>
+            )}
+            <div className={style.price}>
+              <h4>{zapatilla.price * quantity} $</h4>
+            </div>
+            <div className={style.containerColors}>
+              <label>Colors:</label>
+              <div className={style.colorOptionsContainer}>
+                {zapatilla.colors.map((color, index) => (
+                  <div
+                    key={index}
+                    className={`${style.colorOption}  
+                ${color === hoveredColor ? style.hovered : ""} 
+                ${color === selectedColor ? style.selectedColor : ""}`}
+                    onMouseOver={() => setHoveredColor(color)}
+                    onMouseOut={() => setHoveredColor("")}
+                    onClick={() => handleColorChange(color)}
+                  >
+                    {color}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={style.sizesContainer}>
+              <div className={style.sizes}>
+                <p>Selecciona tu talla:</p>
+              </div>
+              <div className={style.sizeOptionsContainer}>
+                {zapatilla.size.map((size, index) => (
+                  <div
+                    key={index}
+                    className={`${style.colorOption} 
+                    ${size === hoveredSize ? style.hovered : ""} 
+                    ${size === selectedSize ? style.selectedSize : ""}`}
+                    onMouseOver={() => setHoveredSize(size)}
+                    onMouseOut={() => setHoveredSize("")}
+                    onClick={() => handleSizeChange(size)}
+                  >
+                    {`US ${size}`}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={style.quantityContainer}>
+              <p>cantidad:</p>
+              <div className={style.quantityButtons}>
+                <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+                  -
+                </button>
+                <span>{quantity}</span>
+                <button onClick={() => setQuantity(quantity + 1)}>+</button>
+              </div>
+            </div>
 
-          <button className={style.addToCartButton} onClick={handleAddToCart}>
-            Agregar al Carrito
-          </button>
+            <button
+              className={style.addToCartButton}
+              onClick={() => {
+                if (auth === null) {
+                  setMessages([
+                    "registrase para agregar productos al carro",
+                    <Link to="/login">Iniciar sesión</Link>,
+                  ]);
+                } else if (auth.token.id) {
+                  if (selectedColor && selectedSize && id && auth.token.id) {
+                    handleAddToCart();
+                    setMessages([
+                      "agregado",
+                      <Link to="/shopping">ir al carrito</Link>,
+                    ]);
+                  } else {
+                    setMessages([
+                      "Por favor, elija todas las opciones antes de agregar al carrito",
+                    ]);
+                  }
+                }
+              }}
+            >
+              Agregar al Carrito
+            </button>
+
+            {messages.length > 0 && (
+              <div className={style.messages}>
+                {messages.map((message, index) => (
+                  <p key={index}>{message}</p>
+                ))}
+              </div>
+            )}
+            <div className={style.collect}>
+              <span>Recogida gratuita</span>
+            </div>
+
+            <div className={style.lineDivider}></div>
+
+            <p className={style.description}>
+              {zapatilla.description
+                ? zapatilla.description
+                : "no hay description"}
+            </p>
+
+            <div className={style.lineDivider}></div>
+
+            <div className={style.devolutionsContainer}>
+              <div>
+                <p className={style.devolutions}>
+                  Devoluciones y envíos gratuitos
+                </p>
+                {!showMore && (
+                  <button
+                    className={style.buttonDevolution}
+                    onClick={toggleShowMore}
+                  >
+                    ver mas...
+                    <FontAwesomeIcon icon={faChevronDown} />
+                  </button>
+                )}
+                {showMore && (
+                  <>
+                    <button onClick={toggleShowMore}>
+                      Ver menos <FontAwesomeIcon icon={faChevronUp} />
+                    </button>
+                    {
+                      <p className={style.descriptionDevolution}>
+                        Entrega estándar gratuita con tu{" "}
+                        {zapatilla && zapatilla.brand} Membership. Puedes
+                        devolver tu pedido en un plazo de 30 días sin ningún
+                        coste.
+                      </p>
+                    }
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
+      <div className={style.detailContainer}>
+        <div className={style.detailContent}></div>
       </div>
       <div className={style.reviewContainer}>
         <Reviews productId={zapatilla && zapatilla.id} />

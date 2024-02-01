@@ -1,5 +1,4 @@
 /* Contenedor principal de la compra */
-
 .shoppingContainer {
   display: flex;
   align-items: center;
@@ -28,26 +27,29 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   background-color: white;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  height: 100%; /* Ajustamos la altura de la tarjeta */
+  position: relative; /* Añadida posición relativa */
+  z-index: 0; /* Asegura que las tarjetas estén por debajo del contenedor de pago */
 }
 
 .shoppingCard:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  border: 2px solid #000; /* Borde negro */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
-    border 0.3s ease-in-out;
+  transform: scale(1.00); /* Reducido el valor para disminuir la escala en el hover */
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2); /* Reducido el valor para suavizar la sombra en el hover */
+  border: 2px solid #000;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border 0.2s ease-in-out;
 }
 
 /* Imagen de la tarjeta */
 .cardImage {
   width: 100%;
-  height: 200px;
+  height: 200px; /* Ajustamos la altura de la imagen */
   object-fit: cover;
   border-radius: 8px 8px 0 0;
 }
+
 
 /* Contenido de la tarjeta */
 .cardContent {
@@ -75,17 +77,18 @@
   transition: background-color 0.3s ease-in-out;
 }
 
-/* Contenedor de pago */
 .paymantContainer {
+  background-color: rgb(255, 255, 255);
   display: flex;
-  position: sticky;
+  position: relative; 
   flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 20px; /* Ajustado el margen inferior */
-  margin-top: 20px; /* Ajustado el margen superior */
-  padding: 20px; /* Añadido padding */
-  border: 2px solid #ddd; /* Añadido borde */
-  border-radius: 8px; /* Añadida la esquina redondeada */
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px solid #040404;
+  border-radius: 8px;
+  z-index: 1; /* Asegura que el contenedor esté por encima de las tarjetas */
 }
 
 /* Resumen de compra */
@@ -129,17 +132,24 @@
   font-size: 14px;
   margin-bottom: 8px;
   color: #000000;
-  font-family: Verdana, Geneva, Tahoma, "Franklin Gothic Medium", "Arial Narrow";
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+.unidad {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #000000;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
 /* Contenedor del botón de compra */
 .buyButtonContainer {
   text-align: center;
   display: flex;
-  flex-direction: column; /* Cambiado a columna */
-  align-items: center; /* Centrado en el eje vertical */
-  margin-top: 20px; /* Ajustado el margen superior */
-  margin-bottom: 20px; /* Ajustado el margen inferior */
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /* Botón de compra */
@@ -157,12 +167,12 @@
 }
 
 .buyButton:hover {
-  background-color: #259ee9;
+  background-color: #141b1f;
 }
 
 /* Botón de eliminación de tarjeta */
 .cardRemoveButton {
-  background-color: #ff0000;
+  background-color: #000000;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -174,5 +184,5 @@
 }
 
 .cardRemoveButton:hover {
-  background-color: #ff4d4d;
+  background-color: #f80000;
 }

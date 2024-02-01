@@ -103,6 +103,7 @@ const initialState = {
   shoppingItems: [],
   products: [],
 };
+
 const stateSearchBar = {
   data: null,
   page: 0,

@@ -2,8 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin: 30px;
+  margin: 60px;
   background-color: white;
+  position: relative;
+  top: 0px;
   border-radius: 2px;
 }
 
@@ -14,7 +16,7 @@
 
 .cardContent {
   width: 280px;
-  height: 408px;
+  height: 360px;
   box-shadow: 0px 2px 4px black;
 }
 
@@ -25,12 +27,11 @@
 }
 
 .cardContent .cardTitle h3 {
-  background-color: black;
-  color: white;
+  background-color: transparent;
+  color: black;
 }
 
 .cardContent h3 {
-  background-color: white;
   margin: 0 auto;
   font-size: 20px;
   text-align: center;
@@ -39,8 +40,8 @@
 
 .cardContent img {
   width: 280px;
+  height: 260px;
   margin: 0 auto;
-  height: 300px;
   justify-self: center;
   object-fit: cover;
   margin-bottom: 6px;
@@ -53,16 +54,18 @@
   justify-content: center;
   height: 30px;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 100;
   margin: 0 auto;
 }
 
 .details {
   display: flex;
-  justify-content: center;
+  margin: 0 auto;
   background-color: white;
+  width: 200px;
+  justify-content: center;
   position: relative;
-  top: 7px;
+  height: 60px;
 }
 
 .details h4 {
@@ -71,6 +74,7 @@
   color: green;
   position: relative;
   top: 4px;
+  text-align: center;
 }
 
 .details button {
@@ -93,17 +97,6 @@
   position: relative;
   top: -6px;
   left: -6px;
-}
-
-.logoContainer img {
-  justify-self: center;
-  object-fit: cover;
-  width: 54px;
-  height: 30px;
-  position: relative;
-  top: -350px;
-  left: 220px;
-  border: none;
 }
 
 @media (max-width: 767px) {
@@ -194,17 +187,6 @@
     margin: 0 auto;
     justify-self: center;
     object-fit: cover;
-  }
-
-  .logoContainer img {
-    justify-self: center;
-    object-fit: cover;
-    width: 36px;
-    height: 20px;
-    position: relative;
-    top: -350px;
-    left: 220px;
-    border: none;
   }
 
   .brand h3 {
