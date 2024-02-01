@@ -85,7 +85,6 @@ const initialState = {
   selectedImageIndex: [],
   login: {},
   loading: false,
-  error: null,
   auth: {
     loading: false,
   },
